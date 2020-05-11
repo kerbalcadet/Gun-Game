@@ -49,8 +49,11 @@ function GM:PlayerNoClip()
 end
 
 function GM:GetFallDamage(ply, speed)
-    print("test")
-    return (speed/50)
+    return GG.Falldmg
+end
+
+function GM:SetPlayerSpeed()
+    return 500
 end
 
 Spawns = {}

@@ -26,10 +26,3 @@ function GM:PlayerDeath(vic, inf, att)
     handledeath(vic, inf, att)
 end
 
-function GM:GetFallDamage(ply, speed)
-    return GG.Falldmg
-end
-
-function GM:SetPlayerSpeed()
-    return 500
-end
