@@ -42,10 +42,7 @@ GG.Noclip = CreateConVar("gg_noclip", 0, "FCVAR_NONE", "", 0, 1)
 GG.Falldmg = CreateConVar("gg_noclip", 0, "FCVAR_NONE", "", 0)
 
 function GM:PlayerNoClip()
-    local v = GG.Noclip:GetInt()
-
-    if(v > 0) then return true 
-    else return false end
+    return GG.Noclip:GetInt() > 0
 end
 
 function GM:GetFallDamage(ply, speed)
