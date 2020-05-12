@@ -17,6 +17,7 @@ hook.Add("PlayerSay", "spawn commands", function(ply, str)
         return ""
     elseif string.Trim(str) == "gg.spawnclear" then 
         Spawns = {}
+        SpawnFile({})
         return ""
     elseif string.Trim(str) == "gg.restart" then End(ply) 
         return ""
