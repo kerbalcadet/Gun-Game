@@ -1,24 +1,3 @@
-    --spawns
-
-function SpawnCreate()
-    local str = SpawnFile()
-    local vecs = string.Split(str, ",")
-
-    if(vecs[1] != "") then
-        for k, v in pairs(ents.FindByClass("info_player_start")) do
-           v:Remove()
-        end
-
-        for a, b in pairs(vecs) do
-            if a%3 == 0 then
-                local s = ents.Create("info_player_start")
-                s:SetPos(Vector(vecs[a-2], vecs[a-1], b))
-                table.insert(Points, s)
-            end
-        end
-    end
-end
-
 function GM:PlayerSelectSpawn()
     local t = ents.FindByClass("info_player_start")
     return t[math.random(#t)]
@@ -29,12 +8,10 @@ end
 hook.Add("PlayerSay", "spawn commands", function(ply, str)
 
     if string.Trim(str) == "gg.spawncreate" then 
-        table.insert(Spawns, ply:GetPos())
-        SpawnFile(Spawns)
+        table.insert(Spawns, ply:GetPos():ToTable())
         return ""
     elseif string.Trim(str) == "gg.spawnclear" then 
         Spawns = {}
-        cleanup.CC_AdminCleanup(player.GetAll()[1], "gmod_admin_cleanup", {})
         return ""
     elseif string.Trim(str) == "gg.restart" then End(ply) 
         return ""

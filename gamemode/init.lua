@@ -8,8 +8,8 @@ include("player.lua")
 GM.Name =  "Gun Game"
 
 function GM:Initialize()
-    if Spawns[1] then SpawnFile(Spawns) end
-    SpawnCreate()
+    if Spawns[1] then SpawnFile(Spawns)
+    else Spawns = SpawnFile() end
 end
 
 --spawning mechanics

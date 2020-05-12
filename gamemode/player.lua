@@ -12,6 +12,10 @@ end
 function setupplayer(ply)
     if !ply.Level then ply.Level = 1 end
 
+    if SpawnFile()[1] then 
+        local pt = SpawnFile()[math.random(#SpawnFile())]
+        ply:SetPos(Vector(pt[1], pt[2], pt[3])) end
+
     ply:SetModel(pms[math.random(#pms)])
     ply:SetupHands()
     ply:SetHealth(GG.Health:GetInt())
