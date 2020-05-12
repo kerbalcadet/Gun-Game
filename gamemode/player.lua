@@ -22,7 +22,7 @@ end
 function SetPos(ply)
     if SpawnFile()[1] then
 
-        for i = 1, 100 do
+        for i = 1, 10 do
             local pt = SpawnFile()[math.random(#SpawnFile())]
             local vec = (Vector(pt[1], pt[2], pt[3]))
             local close = 0
