@@ -11,7 +11,6 @@ GM.Name =  "Gun Game"
 function GM:Initialize()
     if Spawns[1] then SpawnFile(Spawns)
     else Spawns = SpawnFile() end
-    print("test")
 end
 
 --spawning mechanics

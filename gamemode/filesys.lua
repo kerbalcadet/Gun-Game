@@ -8,7 +8,6 @@ function SpawnFile(tbl)
 
     if tbl then
         file.Write(dir, util.TableToKeyValues(tbl))
-        print(util.TableToKeyValues(tbl))
     end
     
     return util.KeyValuesToTable(file.Read(dir, "DATA"))

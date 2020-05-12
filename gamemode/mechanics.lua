@@ -23,15 +23,20 @@ function Demote(ply)
 end
 
 function GM:PlayerDeath(vic, inf, att)
+
+    if(att.Level >= #weaps) then
+        End(att)
+        return 
+    end
+
     if att:IsPlayer() && att != vic then
-        if att:GetActiveWeapon():GetClass() == weaps[att.Level].weap && att:Alive()  then       --normal kill
-            if(att.Level >= #weaps) then End(att)
-            else Promote(att) end
+        if att:GetActiveWeapon():GetClass() != weaps.Knife && att:Alive()  then       --normal kill
+            Promote(att)
         else
             Demote(vic)        --knife kill
             GivePlyAmmo(att)
         end
-        elseif att == vic then        --suicide
+    elseif att == vic then        --suicide
         Demote(vic)
     end
 
@@ -74,7 +79,6 @@ function End(ply)
         gmod.GetGamemode():Initialize()
         for k, v in pairs(player.GetAll()) do
             game.CleanUpMap(true)
-            initplayer(v)
             v:Spawn()
         end
     end)
