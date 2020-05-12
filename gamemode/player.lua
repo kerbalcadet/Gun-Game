@@ -49,3 +49,11 @@ function handledeath(vic, inf, att)
     net.WriteEntity(att)
     net.Broadcast()
 end
+
+hook.Add("Think", "killunderheight", function()
+    if GG.Barrier:GetInt() != 0 then
+        for k, v in pairs(player.GetAll()) do
+            if v:GetPos().z*GG.Barrier:GetInt() < GG.Barrierheight:GetInt() && v:Alive() then v:Kill() end
+        end
+    end
+end)
