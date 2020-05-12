@@ -3,9 +3,8 @@ net.Receive("death", function()
     inf = net.ReadEntity()
     att = net.ReadEntity()
 
-    if att:IsPlayer() && vic:IsPlayer() then
-        GAMEMODE:AddDeathNotice("test", "test", "test", "test", "test")
+    if att == LocalPlayer() then
+        if(att == vic) then chat.AddText(Color(255, 255, 255), "you died ")
+        else chat.AddText(Color(255, 255, 255), "killed "..vic:GetName()) end
     end
-
-    chat.AddText(Color(255, 255, 255), att:GetName().." killed "..vic:GetName())
 end)

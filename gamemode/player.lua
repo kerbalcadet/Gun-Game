@@ -43,18 +43,20 @@ end
 function handledeath(vic, inf, att)
     if att:IsPlayer() && att != vic then
 
-        if att:GetActiveWeapon():GetClass() == weaps[att.Level].weap && att:Alive() then
+        if att:GetActiveWeapon():GetClass() == weaps[att.Level].weap && att:Alive()  then
             att:StripWeapons()
 
             att.Level = att.Level + 1
             if(att.Level > #weaps) then End(att)
             else GiveWep(att, att.Level) end
 
-        elseif att:IsPlayer() then 
+        else
             if(vic.Level > 1) then vic.Level = vic.Level - 1 end
 
             att:GiveAmmo(weaps.ammo[weaps[att.Level].type], att:GetWeapon(weaps[att.Level].weap):GetPrimaryAmmoType())
         end
+    elseif att == vic then
+        if(vic.Level > 1) then vic.Level = vic.Level - 1 end
     end
 
     --death notice
@@ -69,7 +71,12 @@ end
 hook.Add("Think", "killunderheight", function()
     if GG.Barrier:GetInt() != 0 then
         for k, v in pairs(player.GetAll()) do
-            if v:GetPos().z*GG.Barrier:GetInt() < GG.Barrierheight:GetInt() && v:Alive() then v:Kill() end
+            local dmg = DamageInfo()
+            dmg:SetDamage(100)
+            dmg:SetAttacker(v)
+            dmg:SetInflictor(v)
+
+            if v:GetPos().z*GG.Barrier:GetInt() < GG.Barrierheight:GetInt() && v:Alive() then v:TakeDamageInfo(dmg) end
         end
     end
 end)
