@@ -1,8 +1,3 @@
-function GM:PlayerSelectSpawn()
-    local t = ents.FindByClass("info_player_start")
-    return t[math.random(#t)]
-end
-
     --managespawns chat
 
 hook.Add("PlayerSay", "spawn commands", function(ply, str)
