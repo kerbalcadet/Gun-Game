@@ -28,7 +28,8 @@ function SetPos(ply)
             local close = 0
 
             for k, v in pairs(player.GetAll()) do
-                if (v:GetPos() - vec):Distance() < 1000 then close = 1 break end
+                if !v:Alive() then break end
+                if vec:Distance(v:GetPos()) < GG.Spawndist:GetInt() then close = 1 break end
             end
             
             if close == 0 then ply:SetPos(vec)

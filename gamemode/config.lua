@@ -20,7 +20,7 @@ weaps = {
     [8] = {weap = "cw_kk_ins2_fnfal", type = "semiauto"},
     [9] = {weap = "cw_kk_ins2_rpk", type = "lmg"},
     [10] = {weap = "cw_kk_ins2_m40a1", type = "sniper"},
-    [11] = {weap = "weapon_frag", type = "explosive"}
+    [11] = {weap = "cw_kk_ins2_nade_ied", type = "explosive"}
 }
 
 
@@ -42,6 +42,7 @@ GG.Noclip = CreateConVar("gg_noclip", 0, "FCVAR_NONE", "", 0, 1)
 GG.Falldmg = CreateConVar("gg_falldmg", 0, "FCVAR_NONE", "", 0)
 GG.Barrier = CreateConVar("gg_barrier", 0, "FCVAR_NONE", "", -1, 1)
 GG.Barrierheight = CreateConVar("gg_barrierheight", 0, "FCVAR_NONE", "")
+GG.Spawndist = CreateConVar("gg_spawndist", 800, "FCVAR_NONE", "", 0)
 
 function GM:PlayerNoClip()
     return GG.Noclip:GetInt() > 0

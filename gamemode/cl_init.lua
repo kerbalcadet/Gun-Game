@@ -6,4 +6,6 @@ net.Receive("death", function()
     if att:IsPlayer() && vic:IsPlayer() then
         GAMEMODE:AddDeathNotice("test", "test", "test", "test", "test")
     end
+
+    chat.AddText(Color(255, 255, 255), att:GetName().." killed "..vic:GetName())
 end)
