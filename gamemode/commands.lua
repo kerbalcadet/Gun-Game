@@ -1,4 +1,14 @@
-    --managespawns chat
+    --console--
+
+
+
+
+
+
+
+    --chat--
+
+
 
 hook.Add("PlayerSay", "spawn commands", function(ply, str)
 
@@ -26,26 +36,3 @@ hook.Add("PlayerSay", "spawn commands", function(ply, str)
         return ""
     end
 end)
-
-    --weapons
-
-function GiveWep(ply, lvl)
-    ply:Give(weaps[lvl].weap, true)
-    ply:GetWeapon(weaps[lvl].weap):SetClip1(weaps.ammo[weaps[lvl].type])
-    ply:Give(weaps.Knife)
-end
-
-    --end
-
-function End(ply)
-    PrintMessage(4, ply:Nick().." Has won!")
-
-    timer.Create("endwait", 5, 1, function()
-        gmod.GetGamemode():Initialize()
-        for k, v in pairs(player.GetAll()) do
-            game.CleanUpMap(true)
-            initplayer(v)
-            v:Spawn()
-        end
-    end)
-end
