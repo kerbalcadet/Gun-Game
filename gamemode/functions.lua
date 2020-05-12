@@ -48,7 +48,7 @@ function End(ply)
     timer.Create("endwait", 5, 1, function()
         gmod.GetGamemode():Initialize()
         for k, v in pairs(player.GetAll()) do
-            cleanup.CC_AdminCleanup(player.GetAll()[1], "gmod_admin_cleanup", {})
+            game.CleanUpMap(true)
             initplayer(v)
             v:Spawn()
         end

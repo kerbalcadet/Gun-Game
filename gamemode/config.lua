@@ -20,7 +20,7 @@ weaps = {
     [8] = {weap = "cw_kk_ins2_fnfal", type = "semiauto"},
     [9] = {weap = "cw_kk_ins2_rpk", type = "lmg"},
     [10] = {weap = "cw_kk_ins2_m40a1", type = "sniper"},
-    [11] = {weap = "weapon_physcannon", type = "explosive"}
+    [11] = {weap = "weapon_frag", type = "explosive"}
 }
 
 
