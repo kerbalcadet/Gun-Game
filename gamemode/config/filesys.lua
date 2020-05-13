@@ -14,16 +14,16 @@ function SpawnFile(tbl)
 end
 
 function WeapFile(path, cfg)
-    local cfg = "ins2"
-
-    local dir = "gungame/weapons/"..cfg..".txt"
-
-    if !file.Exists(dir, "DATA") then 
-        file.CreateDir("gungame/weapons")
-        file.Write(dir, "")
-    end
-
     if path then
+        if !cfg then print("func WeapFile needs CFG!") return end
+
+        local dir = "gungame/weapons/"..cfg..".txt"
+
+        if !file.Exists(dir, "DATA") then 
+            file.CreateDir("gungame/weapons")
+            file.Write(dir, "")
+        end
+
         local f, weps = file.Find(path.."*", "MOD")
         local t = {}
 
@@ -32,7 +32,7 @@ function WeapFile(path, cfg)
         end
 
         file.Write(dir, util.TableToKeyValues(t))
-    else print("string path from /garrysmod needed") end
+    end
     
-    return util.KeyValuesToTable(file.Read(dir, "DATA"))
+    return util.KeyValuesToTable(file.Read("gungame/weapons/"..GG.Cfg..".txt", "DATA"))
 end
