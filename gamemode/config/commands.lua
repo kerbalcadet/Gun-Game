@@ -1,8 +1,12 @@
     --console--
+concommand.Add("gg_readweapfolder", function(ply, cmd, args)
+    if args[3] then WeapFile(args[1], args[2], args[3])
+    else print("input folder path from garrysmod/ (addons/addon/lua/weapons), name of cfg, and mode (write or add)") end
+end)
 
-
-
-
+concommand.Add("gg_cfg", function(ply, cmd, args)
+    if args[1] && isstring(args[1]) then GG.Cfg = args[1] end
+end)
 
 
 
@@ -19,8 +23,6 @@ hook.Add("PlayerSay", "spawn commands", function(ply, str)
         Spawns = {}
         return ""
     elseif string.Trim(str) == "gg.restart" then End(ply) 
-        return ""
-    elseif string.Trim(str) == "gg.weapfile" then WeapFile("addons/gmad/[cw_2.0]_kk_ins2doi_sweps_657241323/lua/weapons/", "ins2")
         return ""
     elseif string.Trim(str) == "gg.throne" then
         ply.throne = 1

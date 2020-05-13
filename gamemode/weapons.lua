@@ -15,7 +15,7 @@ function WeapsAdd(cfg)
         local v = t[math.random(#t)]
 
         if v[2] != "disabled" then
-            table.insert(weaps, {weap = v[1], type = v[2]})
+            table.insert(weaps, {class = v[1], type = v[2]})
         end
     end 
 end

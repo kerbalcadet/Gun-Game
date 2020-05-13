@@ -6,16 +6,40 @@
 
 
 function GiveWep(ply, lvl)
+    local weap = weaps[lvl]
+
+    local a = 0
+    if ply:Alive() && lvl > 1 && IsValid(ply:GetActiveWeapon()) then
+        local w = ply:GetActiveWeapon()
+        a = math.Clamp(math.floor((ply:GetAmmoCount(w:GetPrimaryAmmoType()) + w:Clip1())/ammo[weaps[lvl - 1].type]) - 1, 0, 10)
+    end
+    
+
     ply:StripWeapons()
-    ply:Give(weaps[lvl].weap, true)
-    ply:GetWeapon(weaps[lvl].weap):SetClip1(ammo[weaps[lvl].type])
+    ply:StripAmmo()
+    ply:Give(weaps[lvl].class, true)
     ply:Give(GG.Knife)
-end
+
+    weapobj = ply:GetWeapon(weap.class)
+
+    if weap.type == "explosive" then
+        ply:GiveAmmo(a, weapobj:GetPrimaryAmmoType())
+    else
+        local total = ammo[weap.type] + a*ammo[weap.type]
+        local clip1 = math.Clamp(total, 0, weapobj:GetMaxClip1())
+        weapobj:SetClip1(clip1) 
+        ply:GiveAmmo(total - clip1, weapobj:GetPrimaryAmmoType())
+        
+        print(ammo[weap.type].." default,"..a.."*"..ammo[weap.type].." extra")
+
+    end
+
+end 
 
 function GivePlyAmmo(ply)
-    local wep = ply:GetWeapon(weaps[ply.Level].weap)
+    local weap = weaps[ply.Level]
 
-    ply:GiveAmmo(ammo[weaps[ply.Level].type], ply:GetWeapon(weaps[ply.Level].weap):GetPrimaryAmmoType())
+    ply:GiveAmmo(ammo[weap.type], ply:GetWeapon(weap.class):GetPrimaryAmmoType())
 end
 
 function Promote(ply)
@@ -82,7 +106,7 @@ function End(ply)
     timer.Create("endwait", 5, 1, function()
         gmod.GetGamemode():Initialize()
         for k, v in pairs(player.GetAll()) do
-            game.CleanUpMap(true)
+            game.CleanUpMap(false)
             gmod.GetGamemode():PlayerInitialSpawn(v)
             v:Spawn()
         end

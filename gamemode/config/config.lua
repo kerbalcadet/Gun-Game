@@ -2,13 +2,13 @@ GG = {}
 
 ammo = {
     ["pistol"] = 5,
-    ["smg"] = 5,
-    ["shotgun"] = 1,
-    ["semiauto"] = 4,
+    ["smg"] = 8,
+    ["shotgun"] = 3,
+    ["semiauto"] = 5,
     ["assault"] = 6,
     ["lmg"] = 5,
-    ["sniper"] = 1,
-    ["explosive"] = 0,
+    ["sniper"] = 3,
+    ["explosive"] = 1,
     ["generic"] = 5,
     ["launcher"] = 1
 }
@@ -29,14 +29,13 @@ pms = {
     --convars / properties--
 
 
-GG.Health = CreateConVar("gg_health", 20, "FCVAR_NONE", "", 1)
-GG.AmmoGain = CreateConVar("gg_ammogain", 1, "FCVAR_NONE", "", 0)
+GG.Health = CreateConVar("gg_health", 30, "FCVAR_NONE", "", 1)
 GG.Noclip = CreateConVar("gg_noclip", 0, "FCVAR_NONE", "", 0, 1)
 GG.Falldmg = CreateConVar("gg_falldmg", 0, "FCVAR_NONE", "", 0)
 GG.Barrier = CreateConVar("gg_barrier", 0, "FCVAR_NONE", "", -1, 1)
 GG.Barrierheight = CreateConVar("gg_barrierheight", 0, "FCVAR_NONE", "")
 GG.Spawndist = CreateConVar("gg_spawndist", 800, "FCVAR_NONE", "", 0)
-GG.Weapnum = CreateConVar("gg_weapnum", 1, "FCVAR_NONE", "", 1, 100)
+GG.Weapnum = CreateConVar("gg_weapnum", 15, "FCVAR_NONE", "", 1, 100)
 GG.Cfg = "ins2"
 GG.Lastwep = "cw_kk_ins2_nade_c4"
 

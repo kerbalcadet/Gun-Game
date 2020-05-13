@@ -13,26 +13,29 @@ function SpawnFile(tbl)
     return util.KeyValuesToTable(file.Read(dir, "DATA"))
 end
 
-function WeapFile(path, cfg)
-    if path then
-        if !cfg then print("func WeapFile needs CFG!") return end
+function WeapFile(path, cfg, mode)
+    if path && cfg && mode then
 
         local dir = "gungame/weapons/"..cfg..".txt"
 
         if !file.Exists(dir, "DATA") then 
-            file.CreateDir("gungame/weapons")
+            file.CreateDir("gungame/weapons")       --create file
             file.Write(dir, "")
         end
 
         local f, weps = file.Find(path.."*", "MOD")
+
         local t = {}
+        if mode == "add" && file.Exists(dir, "DATA") then
+            t = util.KeyValuesToTable(file.Read(dir, "DATA"))
+        end
 
         for k, v in pairs(weps) do
-            table.insert(t, {v, "generic"})
+            table.insert(t, {v, "generic"})         --add weap tables to blank table
         end
 
         print(util.TableToKeyValues(t))
-
+    
         file.Write(dir, util.TableToKeyValues(t))
     end
     

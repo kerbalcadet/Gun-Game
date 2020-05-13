@@ -6,7 +6,6 @@ function GM:PlayerInitialSpawn(ply)
     if !ply:IsPlayer() then return end
 
     ply.Level = 1
-    ply.SpawnCt = 1
 end
 
 function GM:PlayerSpawn(ply)
