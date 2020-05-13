@@ -1,8 +1,8 @@
 function SpawnFile(tbl)
-    local dir = "gungame/"..game.GetMap()..".txt"
+    local dir = "gungame/spawns/"..game.GetMap()..".txt"
 
     if !file.Exists(dir, "DATA") then 
-        file.CreateDir("gungame")
+        file.CreateDir("gungame/spawns")
         file.Write(dir, "")
     end
 

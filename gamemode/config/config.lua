@@ -35,6 +35,8 @@ pms = {
     "models/player/guerilla.mdl"
 }
 
+if SERVER then 
+
 GG = {}
 GG.Health = CreateConVar("gg_health", 20, "FCVAR_NONE", "", 1)
 GG.AmmoGain = CreateConVar("gg_ammogain", 1, "FCVAR_NONE", "", 0)
@@ -57,3 +59,5 @@ function GM:SetPlayerSpeed()
 end
 
 Spawns = {}
+
+end

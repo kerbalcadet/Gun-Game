@@ -1,3 +1,5 @@
+include("config.lua")
+
 net.Receive("death", function()
     vic = net.ReadEntity()
     inf = net.ReadEntity()
@@ -5,6 +7,6 @@ net.Receive("death", function()
 
     if att == LocalPlayer() then
         if(att == vic) then chat.AddText(Color(255, 255, 255), "you died ")
-        else chat.AddText(Color(255, 255, 255), "killed "..vic:GetName()) end
+        else chat.AddText(Color(255, 255, 255), "killed "..vic:GetName())
     end
 end)

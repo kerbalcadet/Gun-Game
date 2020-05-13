@@ -1,8 +1,8 @@
 AddCSLuaFile("cl_init.lua")
-include("config.lua")
-include("filesys.lua")
+include("config/config.lua")
+include("config/filesys.lua")
+include("config/commands.lua")
 include("player.lua")
-include("commands.lua")
 include("mechanics.lua")
 
 

@@ -1,3 +1,6 @@
+
+
+
     --player management--
 
 
@@ -25,6 +28,7 @@ end
 function GM:PlayerDeath(vic, inf, att)
 
     if(att.Level >= #weaps) then
+        att:StripWeapons()
         End(att)
         return 
     end
@@ -79,6 +83,7 @@ function End(ply)
         gmod.GetGamemode():Initialize()
         for k, v in pairs(player.GetAll()) do
             game.CleanUpMap(true)
+            gmod.GetGamemode():PlayerInitialSpawn(v)
             v:Spawn()
         end
     end)
