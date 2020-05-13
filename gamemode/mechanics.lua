@@ -8,12 +8,12 @@
 function GiveWep(ply, lvl)
     ply:StripWeapons()
     ply:Give(weaps[lvl].weap, true)
-    ply:GetWeapon(weaps[lvl].weap):SetClip1(weaps.ammo[weaps[lvl].type])
-    ply:Give(weaps.Knife)
+    ply:GetWeapon(weaps[lvl].weap):SetClip1(ammo[weaps[lvl].type])
+    ply:Give(GG.Knife)
 end
 
 function GivePlyAmmo(ply)
-    ply:GiveAmmo(weaps.ammo[weaps[ply.Level].type], ply:GetWeapon(weaps[ply.Level].weap):GetPrimaryAmmoType())
+    ply:GiveAmmo(ammo[weaps[ply.Level].type], ply:GetWeapon(weaps[ply.Level].weap):GetPrimaryAmmoType())
 end
 
 function Promote(ply)
@@ -34,7 +34,7 @@ function GM:PlayerDeath(vic, inf, att)
     end
 
     if att:IsPlayer() && att != vic then
-        if att:GetActiveWeapon():GetClass() != weaps.Knife && att:Alive()  then       --normal kill
+        if att:GetActiveWeapon():GetClass() != GG.Knife && att:Alive()  then       --normal kill
             Promote(att)
         else
             Demote(vic)        --knife kill
