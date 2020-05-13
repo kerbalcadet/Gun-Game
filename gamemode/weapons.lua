@@ -9,15 +9,12 @@ function WeapsAdd(cfg)
     weaps = {}
     local t = WeapFile()
 
-    for i = 1, GG.Weapnum:GetInt() do
-        local find = 0
+    for i = 1, 100 do
+        if #weaps >= GG.Weapnum:GetInt() then break end
+
         local v = t[math.random(#t)]
 
-        for a, b in pairs(weaps) do
-            if i > 1 && v[1] == b then find = 1 break end 
-        end
-
-        if find == 0 && v[2] != "disabled" then
+        if v[2] != "disabled" then
             table.insert(weaps, {weap = v[1], type = v[2]})
         end
     end 

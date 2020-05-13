@@ -13,6 +13,8 @@ function GiveWep(ply, lvl)
 end
 
 function GivePlyAmmo(ply)
+    local wep = ply:GetWeapon(weaps[ply.Level].weap)
+
     ply:GiveAmmo(ammo[weaps[ply.Level].type], ply:GetWeapon(weaps[ply.Level].weap):GetPrimaryAmmoType())
 end
 
@@ -27,18 +29,16 @@ end
 
 function GM:PlayerDeath(vic, inf, att)
 
-    if(att.Level >= #weaps) then
-        att:StripWeapons()
-        End(att)
-        return 
-    end
-
     if att:IsPlayer() && att != vic then
         if att:GetActiveWeapon():GetClass() != GG.Knife && att:Alive()  then       --normal kill
-            Promote(att)
+            if(att.Level >= #weaps) then
+                att:StripWeapons()
+                End(att)
+
+            else Promote(att) end
         else
             Demote(vic)        --knife kill
-            GivePlyAmmo(att)
+            if att:Alive() then GivePlyAmmo(att) end
         end
     elseif att == vic then        --suicide
         Demote(vic)

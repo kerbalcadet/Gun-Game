@@ -31,9 +31,11 @@ function WeapFile(path, cfg)
             table.insert(t, {v, "generic"})
         end
 
+        print(util.TableToKeyValues(t))
+
         file.Write(dir, util.TableToKeyValues(t))
     end
     
     if file.Exists("gungame/weapons/"..GG.Cfg..".txt", "DATA") then return util.KeyValuesToTable(file.Read("gungame/weapons/"..GG.Cfg..".txt", "DATA"))
-    else return {} print("invalid cfg!") end
+    else return {} end
 end
