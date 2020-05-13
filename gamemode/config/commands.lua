@@ -20,6 +20,8 @@ hook.Add("PlayerSay", "spawn commands", function(ply, str)
         return ""
     elseif string.Trim(str) == "gg.restart" then End(ply) 
         return ""
+    elseif string.Trim(str) == "gg.weapfile" then WeapFile("addons/gmad/[cw_2.0]_kk_ins2doi_sweps_657241323/lua/weapons/")
+        return ""
     elseif string.Trim(str) == "gg.throne" then
         ply.throne = 1
 
