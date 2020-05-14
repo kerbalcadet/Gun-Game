@@ -10,7 +10,8 @@ ammo = {
     ["sniper"] = 3,
     ["explosive"] = 1,
     ["generic"] = 5,
-    ["launcher"] = 1
+    ["launcher"] = 1,
+    ["noammo"] = 0
 }
 
 GG.Knife = "weapon_crowbar"
@@ -29,7 +30,7 @@ pms = {
     --convars / properties--
 
 
-GG.Health = CreateConVar("gg_health", 30, "FCVAR_NONE", "", 1)
+GG.Health = CreateConVar("gg_health", 50, "FCVAR_NONE", "", 1)
 GG.Noclip = CreateConVar("gg_noclip", 0, "FCVAR_NONE", "", 0, 1)
 GG.Falldmg = CreateConVar("gg_falldmg", 0, "FCVAR_NONE", "", 0)
 GG.Barrier = CreateConVar("gg_barrier", 0, "FCVAR_NONE", "", -1, 1)

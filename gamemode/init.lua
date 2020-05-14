@@ -13,6 +13,7 @@ function GM:Initialize()
     if Spawns[1] then SpawnFile(Spawns)
     else Spawns = SpawnFile() end
     WeapsAdd(GG.Cfg)
+    ended = 0
 end
 
 --spawning mechanics

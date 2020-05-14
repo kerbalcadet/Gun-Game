@@ -20,4 +20,22 @@ function WeapsAdd(cfg)
     end 
 end
 
+function WeapValid(str)
+    local ply = player.GetAll()[1]
+    if !ply then
+        print("error: need valid player")
+        return
+    end
+
+    if ply:Give(str, true) != NULL then 
+        ply:StripWeapon(str)
+        return true
+    elseif ply:GetWeapon(str) then
+        return true
+    else
+        print("invalid weapon!")
+        return false
+    end
+end
+
 end
