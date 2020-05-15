@@ -30,7 +30,7 @@ function WeapValid(str)
     if ply:Give(str, true) != NULL then 
         ply:StripWeapon(str)
         return true
-    elseif ply:GetWeapon(str) then
+    elseif ply:GetWeapon(str):IsValid() then
         return true
     else
         print("invalid weapon!")

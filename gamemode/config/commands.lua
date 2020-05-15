@@ -75,11 +75,9 @@ concommand.Add("gg_level", function(ply, cmd, args)
         ply.Level = tonumber(arg)
         GiveWep(ply, ply.Level)
     elseif arg == "up" then
-        ply.Level = ply.Level + 1
-        GiveWep(ply, ply.Level)
+        Promote(ply)
     elseif arg == "down" then
-        ply.Level = ply.Level - 1
-        GiveWep(ply, ply.Level)
+        Demote(ply)
     end
 
 end)

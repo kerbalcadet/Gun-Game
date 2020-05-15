@@ -33,7 +33,7 @@ function SetPos(ply)
             end
 
             if close == 0 then ply:SetPos(vec) break
-            elseif i > 14 then ply:SetPos(vec) print("overload") end      
+            elseif i > 14 then ply:SetPos(vec) end      
         end
     end
 end
