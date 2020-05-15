@@ -6,16 +6,11 @@
 
 
 function GiveWep(ply, lvl, time)
+    local weap = weaps[lvl]
     local weapobj = ply:GetActiveWeapon()
     local t = time or 0.1
 
-    if !weaps[lvl] then return end
-    if lvl > 1 && weapobj:IsValid() && weapobj:GetClass() == weaps[lvl].class then     --if weapon doesn't exist or is the same as current
-        timer.Simple(t, function()
-            GivePlyAmmo(ply)
-        end)
-        return
-    end
+    if !weap then return end
 
     local a = 0
     if ply:Alive() && lvl > 1 && IsValid(ply:GetActiveWeapon()) then        -- a = extra ammo in previous weapon
@@ -25,7 +20,14 @@ function GiveWep(ply, lvl, time)
 
     
     timer.Simple(t, function()
-        local weap = weaps[ply.Level]
+        weap = weaps[ply.Level]
+        weapobj = ply:GetActiveWeapon()
+
+        if lvl > 1 && weapobj:IsValid() && weapobj:GetClass() == weap.class then     --if weapon is the same as current
+            GivePlyAmmo(ply)
+            return
+        end
+        if ended then return end
 
         ply:StripWeapons()
         ply:StripAmmo()
@@ -80,14 +82,14 @@ end
 
 function GM:PlayerDeath(vic, inf, att)
 
-    if ended > 0 then return end
+    if ended then return end
 
     if att != vic then
         
         if att:GetActiveWeapon():GetClass() != GG.Knife or inf:GetClass() != "player" or weaps[att.Level].class == GG.Knife then       --normal kill (inf = player on melee or shoot)
             if(att.Level >= #weaps) then
                 att:StripWeapons()
-                if ended == 0 then End(att) end
+                if !ended then End(att) end
             else Promote(att) end
         else
             Demote(vic)        --knife kill
@@ -134,7 +136,7 @@ function End(ply)
     if ply then PrintMessage(4, ply:Nick().." has won!")
     else PrintMessage(4, "Round ended") end
 
-    ended = 1
+    ended = true
 
     timer.Create("endwait", 5, 1, function()
         gmod.GetGamemode():Initialize()

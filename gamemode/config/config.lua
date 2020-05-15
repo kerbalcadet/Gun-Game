@@ -32,7 +32,6 @@ pms = {
 
 
 GG.Health = CreateConVar("gg_health", 50, "FCVAR_NONE", "", 1)
-GG.Noclip = CreateConVar("gg_noclip", 0, "FCVAR_NONE", "", 0, 1)
 GG.Falldmg = CreateConVar("gg_falldmg", 0, "FCVAR_NONE", "", 0)
 GG.Barrier = CreateConVar("gg_barrier", 0, "FCVAR_NONE", "", -1, 1)
 GG.Barrierheight = CreateConVar("gg_barrierheight", 0, "FCVAR_NONE", "")
