@@ -52,31 +52,33 @@ function WeapFileAdd(class, argtype, argcfg)          --append single entries
     file.Write("gungame/weapons/"..cfg..".txt", util.TableToKeyValues(t))
 end
 
-function WeapFileRemove(class, argcfg)              --remove all entries of class
+function WeapFileRemove(key, argcfg)              --remove all entries of class
     local cfg = argcfg or GG.Cfg
     local t = WeapFile(cfg)
 
     for k, v in pairs(t) do
-        if v[1] == class then
+        if v[1] == key or k == tonumber(key) or v[2] == key then
             table.remove(t, k)
         end
     end
 
     file.Write("gungame/weapons/"..cfg..".txt", util.TableToKeyValues(t))
+    print(WeapFileRead(cfg))
 end
 
-function WeapFileType(class, wtype, argcfg)         --Get/set weapon type in file
+function WeapFileType(key, wtype, argcfg)         --Get/set weapon type in file
     local cfg = argcfg or GG.Cfg
     local t = WeapFile(cfg)
 
     for k, v in pairs(t) do
-        if v[1] == class then
+        if v[1] == key or k == tonumber(key) or v[2] == key then
             if wtype then v[2] = wtype
             else print(v[2]) end
         end
     end
 
     file.Write("gungame/weapons/"..cfg..".txt", util.TableToKeyValues(t))
+    print(WeapFileRead(cfg))
 end
 
 function WeapFileClear(cfg)
@@ -98,9 +100,9 @@ function WeapReadFolder(path, mode, argcfg)
         for k, v in pairs(weps) do
             table.insert(t, {v, "generic"})         --add weap tables to blank table
         end
-
-        print(util.TableToKeyValues(t))
     
         file.Write(dir, util.TableToKeyValues(t))
+
+        print(WeapFileRead(cfg))
     end
 end
