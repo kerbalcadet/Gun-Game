@@ -57,7 +57,7 @@ function WeapFileRemove(key, argcfg)              --remove all entries of class
     local t = WeapFile(cfg)
 
     for k, v in pairs(t) do
-        if v[1] == key or k == tonumber(key) or v[2] == key then
+        if string.find(v[1], key) or k == tonumber(key) or v[2] == key then
             table.remove(t, k)
         end
     end
@@ -71,14 +71,14 @@ function WeapFileType(key, wtype, argcfg)         --Get/set weapon type in file
     local t = WeapFile(cfg)
 
     for k, v in pairs(t) do
-        if v[1] == key or k == tonumber(key) or v[2] == key then
+        if string.find(v[1], key) or k == tonumber(key) or v[2] == key then
             if wtype then v[2] = wtype
             else print(v[2]) end
         end
     end
 
     file.Write("gungame/weapons/"..cfg..".txt", util.TableToKeyValues(t))
-    print(WeapFileRead(cfg))
+    if wtype then print(WeapFileRead(cfg)) end
 end
 
 function WeapFileClear(cfg)
