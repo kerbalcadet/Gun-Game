@@ -1,0 +1,9 @@
+>*fix debug behavior (level up/down)
+*change globals in config/config.lua to remove "GG."
+*add command for gg_cfg_rename
+*change all command messages to be uniform and readable
+*add manual first/last weapon
+*add manual weapon order -> add gg_weap_index command
+*add manual weapon type order (gg_weap_order ? ) i.e. pistol -> smg -> shotgun etc. but random values
+*fix HUD to allow default killfeed (make GM:PlayerDeath() hook) -> remove chat killfeed
+>*add weapon precaching client-side
