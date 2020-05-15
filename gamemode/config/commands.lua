@@ -1,7 +1,7 @@
 
 
 
-    --console--
+    --cfg--
 
 
 
@@ -47,33 +47,63 @@ end)
 
 
 
-    --chat--
+    --debug--
 
 
 
-hook.Add("PlayerSay", "spawn commands", function(ply, str)
+concommand.Add("gg_debug", function(ply)
+    local t = {[true] = "enabled", [false] = "disabled"}
 
-    if string.Trim(str) == "gg.spawncreate" then 
-        table.insert(Spawns, ply:GetPos():ToTable())
-        return ""
-    elseif string.Trim(str) == "gg.spawnclear" then 
-        Spawns = {}
-        return ""
-    elseif string.Trim(str) == "gg.restart" then End(ply) 
-        return ""
-    elseif string.Trim(str) == "gg.throne" then
-        ply.throne = 1
-
-        ply:SetVelocity(Vector(0, 0, 400))
---[[
-        for i = 1, 4 do
-            local t = player.CreateNextBot("thronelifter."..i)
-            local a = i*90
-
-            t:Spawn()
-            t:SetPos(ply:GetPos() + Vector(math.sin(a), math.cos(a), 0))
-        end
-]]--
-        return ""
+    if ply:IsAdmin() then
+        ply.Debug = !ply.Debug
+        ply:PrintMessage(2, t[ply.Debug])
+    else print("you must be an admin to use this function")
     end
+end)
+
+function GM:PlayerNoClip(ply, bool)
+    return ply.Debug
+end
+
+concommand.Add("gg_level", function(ply, cmd, args)
+
+    if !ply.Debug then ply:PrintMessage(2, "you must be in debug mode to use this function") return end
+    arg = args[1]
+    if !arg then ply:PrintMessage(2, "input either <level>, <up> or <down>") return end
+
+    if tonumber(arg) then
+        ply.Level = tonumber(arg)
+        GiveWep(ply, ply.Level)
+    elseif arg == "up" then
+        ply.Level = ply.Level + 1
+        GiveWep(ply, ply.Level)
+    elseif arg == "down" then
+        ply.Level = ply.Level - 1
+        GiveWep(ply, ply.Level)
+    end
+
+end)
+
+
+
+    --gameplay--
+
+
+
+concommand.Add("gg_spawn", function(ply)
+    if !ply:IsAdmin() then ply:PrintMessage(2, "you must be an admin to use this function") return end
+
+    table.insert(Spawns, ply:GetPos():ToTable())
+    SpawnFile(Spawns)
+end)
+
+concommand.Add("gg_spawnclear", function(ply)
+    Spawns = {}
+    SpawnFile({})
+end)
+
+concommand.Add("gg_restart", function(ply)
+    if !ply:IsAdmin() then ply:PrintMessage(2, "you must be an admin to use this function") return end
+
+    End()
 end)

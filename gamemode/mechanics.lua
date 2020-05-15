@@ -56,7 +56,7 @@ end
 
 function GM:PlayerDeath(vic, inf, att)
 
-    print(inf:GetClass())
+    if ended > 0 then return end
 
     if att != vic then
         
@@ -106,7 +106,9 @@ end)
 
 
 function End(ply)
-    PrintMessage(4, ply:Nick().." Has won!")
+
+    if ply then PrintMessage(4, ply:Nick().." has won!")
+    else PrintMessage(4, "Round ended") end
 
     ended = 1
 

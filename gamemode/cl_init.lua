@@ -1,4 +1,4 @@
-include("config.lua")
+include("debug.lua")
 
 net.Receive("death", function()
     vic = net.ReadEntity()
@@ -11,3 +11,4 @@ net.Receive("death", function()
         end
     end
 end)
+

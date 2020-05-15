@@ -1,10 +1,13 @@
 AddCSLuaFile("cl_init.lua")
+AddCSLuaFile("debug.lua")
+
 include("config/config.lua")
 include("config/filesys.lua")
 include("config/commands.lua")
 include("weapons.lua")
 include("player.lua")
 include("mechanics.lua")
+include("debug.lua")
 
 
 GM.Name =  "Gun Game"
@@ -15,5 +18,3 @@ function GM:Initialize()
     WeapsAdd(GG.Cfg)
     ended = 0
 end
-
---spawning mechanics

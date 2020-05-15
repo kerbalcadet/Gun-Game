@@ -1,4 +1,5 @@
 GG = {}
+Spawns = {}
 
 ammo = {
     ["pistol"] = 5,
@@ -39,18 +40,3 @@ GG.Spawndist = CreateConVar("gg_spawndist", 800, "FCVAR_NONE", "", 0)
 GG.Weapnum = CreateConVar("gg_weapnum", 15, "FCVAR_NONE", "", 1, 100)
 GG.Cfg = "ins2"
 GG.Lastwep = "cw_kk_ins2_nade_c4"
-
-
-function GM:PlayerNoClip()
-    return GG.Noclip:GetInt() > 0
-end
-
-function GM:GetFallDamage(ply, speed)
-    return GG.Falldmg
-end
-
-function GM:SetPlayerSpeed()
-    return 500
-end
-
-Spawns = {}

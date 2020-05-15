@@ -1,10 +1,12 @@
 util.AddNetworkString("death")
 
+
+
     --set up
 
-function GM:PlayerInitialSpawn(ply)
-    if !ply:IsPlayer() then return end
 
+
+function GM:PlayerInitialSpawn(ply)
     ply.Level = 1
 end
 
@@ -20,7 +22,7 @@ end
 
 function SetPos(ply)
     if SpawnFile()[1] then
-        for i = 1, 10 do
+        for i = 1, 15 do
             local pt = SpawnFile()[math.random(#SpawnFile())]
             local vec = (Vector(pt[1], pt[2], pt[3]))
             local close = 0
@@ -29,14 +31,19 @@ function SetPos(ply)
                 if !v:Alive() then break end
                 if vec:Distance(v:GetPos()) < GG.Spawndist:GetInt() then close = 1 break end
             end
-            
-            if close == 0 then ply:SetPos(vec)
-            elseif i > 99 then ply:SetPos(vec) end
+
+            if close == 0 then ply:SetPos(vec) break
+            elseif i > 14 then ply:SetPos(vec) print("overload") end      
         end
     end
 end
 
-    --death
+
+
+    --properties--
 
 
 
+function GM:GetFallDamage(ply, speed)
+    return GG.Falldmg
+end
