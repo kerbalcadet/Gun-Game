@@ -55,14 +55,15 @@ end
 function WeapFileRemove(key, argcfg)              --remove all entries of class
     local cfg = argcfg or GG.Cfg
     local t = WeapFile(cfg)
+    local tn = {}
 
     for k, v in pairs(t) do
-        if string.find(v[1], key) or k == tonumber(key) or v[2] == key then
-            table.remove(t, k)
+        if !string.find(v[1], key) && k != tonumber(key) and v[2] != key then
+            table.insert(tn, v)                   --lua doesn't like removing indexes while iterating; new table it is
         end
     end
 
-    file.Write("gungame/weapons/"..cfg..".txt", util.TableToKeyValues(t))
+    file.Write("gungame/weapons/"..cfg..".txt", util.TableToKeyValues(tn))
     print(WeapFileRead(cfg))
 end
 
