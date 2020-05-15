@@ -36,6 +36,6 @@ GG.Falldmg = CreateConVar("gg_falldmg", 0, "FCVAR_NONE", "", 0)
 GG.Barrier = CreateConVar("gg_barrier", 0, "FCVAR_NONE", "", -1, 1)
 GG.Barrierheight = CreateConVar("gg_barrierheight", 0, "FCVAR_NONE", "")
 GG.Spawndist = CreateConVar("gg_spawndist", 800, "FCVAR_NONE", "", 0)
-GG.Weapnum = CreateConVar("gg_weapnum", 15, "FCVAR_NONE", "", 1, 100)
+GG.Weapnum = CreateConVar("gg_weap_num", 15, "FCVAR_NONE", "", 1, 100)
 GG.Cfg = "ins2"
 GG.Lastwep = "cw_kk_ins2_nade_c4"
