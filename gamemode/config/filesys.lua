@@ -96,7 +96,8 @@ function WeapReadFolder(path, mode, argcfg)
         local f, weps = file.Find(path.."*", "MOD")
 
         local t = {} 
-        if mode == "add" && file.Exists(dir, "DATA") then t = util.KeyValuesToTable(file.Read(dir, "DATA")) end
+        if mode == "add" && file.Exists(dir, "DATA") then t = util.KeyValuesToTable(file.Read(dir, "DATA"))
+        elseif mode != "write" then return end
 
         for k, v in pairs(weps) do
             table.insert(t, {v, "generic"})         --add weap tables to blank table
@@ -105,5 +106,56 @@ function WeapReadFolder(path, mode, argcfg)
         file.Write(dir, util.TableToKeyValues(t))
 
         print(WeapFileRead(cfg))
+    end
+end
+
+
+
+    --model file--
+
+
+
+function ModelFile(argcfg)
+    local cfg = argcfg or CFG
+
+    if !file.Exists("gungame/models/"..cfg..".txt", "DATA") then       --get and create model file
+        file.Write("gungame/models/"..cfg..".txt", "") end
+
+    return util.KeyValuesToTable(file.Read("gungame/models/"..cfg..".txt", "DATA"))
+end
+
+function ModelFileRead(argcfg)
+    local cfg = argcfg or CFG
+    local t = ModelFile(cfg)
+
+    for k, v in pairs(t) do
+        print("["..k.."] = "..v)
+    end
+end
+
+function ModelFileClear(cfg)
+    file.Delete("gungame/models/"..cfg..".txt")
+end
+
+function ModelReadFolder(path, mode, argcfg)
+    if path && mode then
+        local cfg = argcfg or CFG
+        local dir = "gungame/models/"..cfg..".txt"
+
+        ModelFile(cfg)
+
+        local f, mods = file.Find(path.."*", "MOD")
+
+        local t = {} 
+        if mode == "add" && file.Exists(dir, "DATA") then t = util.KeyValuesToTable(file.Read(dir, "DATA"))
+        elseif mode != "write" then return end
+
+        for k, v in pairs(mods) do
+            table.insert(t, v)         --add weap tables to blank table
+        end
+    
+        file.Write(dir, util.TableToKeyValues(t))
+
+        print(ModelFileRead(cfg))
     end
 end
