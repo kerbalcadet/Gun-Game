@@ -15,6 +15,6 @@ GM.Name =  "Gun Game"
 function GM:Initialize()
     if Spawns[1] then SpawnFile(Spawns)
     else Spawns = SpawnFile() end
-    WeapsAdd(CFG)
+    WeapsAdd()
     ended = false
 end
