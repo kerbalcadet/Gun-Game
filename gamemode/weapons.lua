@@ -2,9 +2,12 @@ weaps = {}
 
 if SERVER then
     
-function WeapsAdd(cfg)
+function WeapsAdd()
 
-    if !file.Exists("gungame/weapons/"..cfg..".txt", "DATA") then return end
+    if !file.Exists("gungame/weapons/"..CFG..".txt", "DATA") then 
+        print("Invalid CFG! No weapons loaded.")
+        return
+    end
 
     weaps = {}
     local t = WeapFile()
