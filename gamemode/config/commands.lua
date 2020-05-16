@@ -69,7 +69,6 @@ concommand.Add("gg_level", function(ply, cmd, args)
 
     if !ply.Debug then ply:PrintMessage(2, "you must be in debug mode to use this function") return end
     arg = args[1]
-    if !arg then ply:PrintMessage(2, "input either <level>, <up> or <down>") return end
 
     if tonumber(arg) then
         ply.Level = tonumber(arg)
@@ -78,8 +77,9 @@ concommand.Add("gg_level", function(ply, cmd, args)
         Promote(ply)
     elseif arg == "down" then
         Demote(ply)
-    end
+    elseif arg then ply:PrintMessage(2, "input either <level>, <up> or <down>") return end
 
+    ply:PrintMessage(2, ply.Level)
 end)
 
 
