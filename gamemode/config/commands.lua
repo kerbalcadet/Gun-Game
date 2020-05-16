@@ -1,7 +1,7 @@
 
 
 
-    --cfg--
+    --weap--
 
 
 
@@ -9,7 +9,7 @@ concommand.Add("gg_weap_readfolder", function(ply, cmd, args)
     if args[2] then 
         WeapReadFolder(args[1], args[2], args[3])
     else
-        print("input folder path from garrysmod/ (addons/addon/lua/weapons), mode (write or add), and optional cfg name") end
+        print("input folder path from garrysmod/ (addons/addon/lua/weapons/), mode (write or add), and optional cfg name") end
 end)
 
 concommand.Add("gg_weap_add", function(ply, cmd, args)
@@ -29,6 +29,25 @@ concommand.Add("gg_weap_type", function(ply, cmd, args)
         WeapFileType(args[1], args[2], args[3])
     else print("input weapon class then type and optional cfg name") end
 end)
+
+
+
+    --model--
+
+
+
+concommand.Add("gg_model_readfolder", function(ply, cmd, args)
+    if args[2] then 
+        ModelReadFolder(args[1], args[2], args[3])
+    else
+        print("input folder path from garrysmod/ (addons/addon/models/weapons/), mode (write or add), and optional cfg name") end
+end)
+
+
+
+    --cfg--
+
+
 
 concommand.Add("gg_cfg", function(ply, cmd, args)
     if args[1] && isstring(args[1]) then CFG = args[1]
