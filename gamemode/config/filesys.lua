@@ -26,7 +26,7 @@ end
 
 
 function WeapFile(argcfg)
-    local cfg = argcfg or GG.Cfg
+    local cfg = argcfg or CFG
 
     if !file.Exists("gungame/weapons/"..cfg..".txt", "DATA") then       --get and create weap file
         file.Write("gungame/weapons/"..cfg..".txt", "") end
@@ -35,7 +35,7 @@ function WeapFile(argcfg)
 end
 
 function WeapFileRead(argcfg)
-    local cfg = argcfg or GG.Cfg
+    local cfg = argcfg or CFG
     local t = WeapFile(cfg)
 
     for k, v in pairs(t) do
@@ -45,7 +45,7 @@ end
 
 function WeapFileAdd(class, argtype, argcfg)          --append single entries
     local wtype = argtype or "generic"
-    local cfg = argcfg or GG.Cfg
+    local cfg = argcfg or CFG
     local t = WeapFile(cfg)
 
     table.insert(t, {class, wtype})
@@ -53,7 +53,7 @@ function WeapFileAdd(class, argtype, argcfg)          --append single entries
 end
 
 function WeapFileRemove(key, argcfg)              --remove all entries of class
-    local cfg = argcfg or GG.Cfg
+    local cfg = argcfg or CFG
     local t = WeapFile(cfg)
     local tn = {}
 
@@ -68,7 +68,7 @@ function WeapFileRemove(key, argcfg)              --remove all entries of class
 end
 
 function WeapFileType(key, wtype, argcfg)         --Get/set weapon type in file
-    local cfg = argcfg or GG.Cfg
+    local cfg = argcfg or CFG
     local t = WeapFile(cfg)
 
     for k, v in pairs(t) do
@@ -88,7 +88,7 @@ end
 
 function WeapReadFolder(path, mode, argcfg)
     if path && mode then
-        local cfg = argcfg or GG.Cfg
+        local cfg = argcfg or CFG
         local dir = "gungame/weapons/"..cfg..".txt"
 
         WeapFile(cfg)

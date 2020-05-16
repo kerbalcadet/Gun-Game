@@ -15,7 +15,7 @@ ammo = {
     ["noammo"] = 0
 }
 
-GG.Knife = "weapon_crowbar"
+KNIFE = "weapon_crowbar"
 
 pms = {
     "models/player/phoenix.mdl",
@@ -31,11 +31,10 @@ pms = {
     --convars / properties--
 
 
-GG.Health = CreateConVar("gg_health", 50, "FCVAR_NONE", "", 1)
-GG.Falldmg = CreateConVar("gg_falldmg", 0, "FCVAR_NONE", "", 0)
-GG.Barrier = CreateConVar("gg_barrier", 0, "FCVAR_NONE", "", -1, 1)
-GG.Barrierheight = CreateConVar("gg_barrierheight", 0, "FCVAR_NONE", "")
-GG.Spawndist = CreateConVar("gg_spawndist", 800, "FCVAR_NONE", "", 0)
-GG.Weapnum = CreateConVar("gg_weap_num", 15, "FCVAR_NONE", "", 1, 100)
-GG.Cfg = "ins2"
-GG.Lastwep = "cw_kk_ins2_nade_c4"
+HEALTH = CreateConVar("gg_health", 50, "FCVAR_NONE", "", 1)
+FALL_DMG = CreateConVar("gg_falldmg", 0, "FCVAR_NONE", "", 0)
+BARRIER = CreateConVar("gg_barrier", 0, "FCVAR_NONE", "", -1, 1)
+BARRIER_HEIGHT = CreateConVar("gg_barrier_height", 0, "FCVAR_NONE", "")
+SPAWN_DIST = CreateConVar("gg_spawn_dist", 800, "FCVAR_NONE", "", 0)
+WEAP_NUM = CreateConVar("gg_weap_num", 15, "FCVAR_NONE", "", 1, 100)
+CFG = "ins2"

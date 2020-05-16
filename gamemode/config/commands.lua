@@ -31,8 +31,8 @@ concommand.Add("gg_weap_type", function(ply, cmd, args)
 end)
 
 concommand.Add("gg_cfg", function(ply, cmd, args)
-    if args[1] && isstring(args[1]) then GG.Cfg = args[1]
-    else print(GG.Cfg) end
+    if args[1] && isstring(args[1]) then CFG = args[1]
+    else print(CFG) end
 end)
 
 concommand.Add("gg_cfg_clear", function(ply, cmd, args)
@@ -95,7 +95,7 @@ concommand.Add("gg_spawn", function(ply)
     SpawnFile(Spawns)
 end)
 
-concommand.Add("gg_spawnclear", function(ply)
+concommand.Add("gg_spawn_clear", function(ply)
     Spawns = {}
     SpawnFile({})
 end)

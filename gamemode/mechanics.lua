@@ -51,7 +51,7 @@ function GiveWep(ply, lvl, time)
             end
         end
 
-        ply:Give(GG.Knife)
+        ply:Give(KNIFE)
     end)
 end 
 
@@ -86,7 +86,7 @@ function GM:PlayerDeath(vic, inf, att)
 
     if att != vic then
         
-        if att:GetActiveWeapon():GetClass() != GG.Knife or inf:GetClass() != "player" or weaps[att.Level].class == GG.Knife then       --normal kill (inf = player on melee or shoot)
+        if att:GetActiveWeapon():GetClass() != KNIFE or inf:GetClass() != "player" or weaps[att.Level].class == KNIFE then       --normal kill (inf = player on melee or shoot)
             if(att.Level >= #weaps) then
                 att:StripWeapons()
                 if !ended then End(att) end
@@ -113,14 +113,14 @@ end
 
 
 hook.Add("Think", "killunderheight", function()
-    if GG.Barrier:GetInt() != 0 then
+    if BARRIER:GetInt() != 0 then
         for k, v in pairs(player.GetAll()) do
             local dmg = DamageInfo()
             dmg:SetDamage(100)
             dmg:SetAttacker(v)
             dmg:SetInflictor(v)
 
-            if v:GetPos().z*GG.Barrier:GetInt() < GG.Barrierheight:GetInt() && v:Alive() then v:TakeDamageInfo(dmg) end
+            if v:GetPos().z*BARRIER:GetInt() < BARRIER_HEIGHT:GetInt() && v:Alive() then v:TakeDamageInfo(dmg) end
         end
     end
 end)

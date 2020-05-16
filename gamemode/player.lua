@@ -16,7 +16,7 @@ function GM:PlayerSpawn(ply)
     SetPos(ply)
     ply:SetModel(pms[math.random(#pms)])
     ply:SetupHands()
-    ply:SetHealth(GG.Health:GetInt())
+    ply:SetHealth(HEALTH:GetInt())
     GiveWep(ply, ply.Level)
 end
 
@@ -29,7 +29,7 @@ function SetPos(ply)
 
             for k, v in pairs(player.GetAll()) do
                 if !v:Alive() then break end
-                if vec:Distance(v:GetPos()) < GG.Spawndist:GetInt() then close = 1 break end
+                if vec:Distance(v:GetPos()) < SPAWN_DIST:GetInt() then close = 1 break end
             end
 
             if close == 0 then ply:SetPos(vec) break
@@ -45,5 +45,5 @@ end
 
 
 function GM:GetFallDamage(ply, speed)
-    return GG.Falldmg
+    return FALL_DMG
 end

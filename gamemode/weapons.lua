@@ -10,7 +10,7 @@ function WeapsAdd(cfg)
     local t = WeapFile()
 
     for i = 1, 100 do
-        if #weaps >= GG.Weapnum:GetInt() then break end
+        if #weaps >= WEAP_NUM:GetInt() then break end
 
         local v = t[math.random(#t)]
 
