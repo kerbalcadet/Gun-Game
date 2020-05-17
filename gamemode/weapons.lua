@@ -3,12 +3,12 @@ weaps = {}
 if SERVER then
     
 function GetRandomWeap(wtype)
-    if !wtype then return end
-
     local t = WeapFile()
     local weap = {}
 
-    for i = 1, #t do
+    if !wtype then return end
+
+    for i = 1, #t*3 do
         local k = math.random(#t)
         if t[k][2] == wtype then 
             weap = t[k]
