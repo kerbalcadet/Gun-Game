@@ -84,6 +84,15 @@ function GM:PlayerNoClip(ply, bool)
     return ply.Debug
 end
 
+concommand.Add("gg_table", function(ply)
+    if !ply.Debug then ply:PrintMessage(2, "you must be in debug mode to use this function") return end
+
+    for i =1, WEAP_NUM:GetInt(), 1
+    do
+        print(weaps[i].type, weaps[i].class)
+    end
+end)
+
 concommand.Add("gg_level", function(ply, cmd, args)
 
     if !ply.Debug then ply:PrintMessage(2, "you must be in debug mode to use this function") return end
