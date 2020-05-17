@@ -2,25 +2,51 @@ weaps = {}
 
 if SERVER then
     
-function WeapsAdd()
-
-    if !file.Exists("gungame/weapons/"..CFG..".txt", "DATA") then 
-        print("Invalid CFG! No weapons loaded.")
-        return
-    end
-
-    weaps = {}
+function GetRandomWeap(weap_type)
     local t = WeapFile()
 
-    for i = 1, 100 do
-        if #weaps >= WEAP_NUM:GetInt() then break end
+    local tmp_weap =t[math.random(#t)]
+    
+    while(tmp_weap[2] !=weap_type or tmp_weap[2] =="disabled")
+    do
+        tmp_weap =t[math.random(#t)]
+    end
 
-        local v = t[math.random(#t)]
+    return tmp_weap
+end
 
-        if v[2] != "disabled" then
-            table.insert(weaps, {class = v[1], type = v[2]})
+function WeapsAdd(cfg)
+    if !file.Exists("gungame/weapons/"..cfg..".txt", "DATA") then return end
+    
+    local types = {
+    "pistol",
+    "shotgun",
+    "smg",
+    "semiauto",
+    "generic",
+    "assault",
+    "lmg",
+    "sniper",
+    "explosive",
+    "launcher"
+    }
+    local weap_num =WEAP_NUM:GetInt()
+    local grp_num_per =math.ceil(weap_num/10)
+    local grp_num =(weap_num-(weap_num%10))/grp_num_per
+
+    for weap_type =1, 10, 1
+    do
+        if(weap_type <=grp_num) then
+            for weap =1, grp_num_per, 1
+            do
+                cur_weap =GetRandomWeap(types[weap_type])
+                table.insert(weaps, {class =cur_weap[1], type =cur_weap[2]})
+            end
+        else
+            cur_weap =GetRandomWeap(types[weap_type])
+            table.insert(weaps, {class =cur_weap[1], type =cur_weap[2]})
         end
-    end 
+    end
 end
 
 function WeapValid(str)
