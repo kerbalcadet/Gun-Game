@@ -6,15 +6,19 @@ function GetRandomWeap(wtype)
     if !wtype then return end
 
     local t = WeapFile()
-    local weapt = {}
+    local weap = {}
 
-    for k, weap in ipairs(t) do
-        if weap[2] == wtype then table.insert(weapt, weap) end
+    for i = 1, #t do
+        local k = math.random(#t)
+        if t[k][2] == wtype then 
+            weap = t[k]
+            break
+        end
     end
 
-    if !weapt[1] then return end
+    if !weap[1] then return end
 
-    return weapt[math.random(#weapt)]
+    return weap
 end
 
 function WeapsAdd()
@@ -32,7 +36,8 @@ function WeapsAdd()
     "lmg",
     "sniper",
     "explosive",
-    "launcher"
+    "launcher",
+    "noammo"
     }
     
     local valid = {}
