@@ -5,12 +5,9 @@ if SERVER then
 function GetRandomWeap(weap_type)
     local t = WeapFile()
 
-    local tmp_weap =t[math.random(#t)]
-    
-    while(tmp_weap[2] !=weap_type or tmp_weap[2] =="disabled")
-    do
+    repeat
         tmp_weap =t[math.random(#t)]
-    end
+    until tmp_weap[2] ==weap_type and tmp_weap[2] !="disabled"
 
     return tmp_weap
 end
