@@ -69,13 +69,17 @@ end
 
 function Promote(ply)
     ply.Level = ply.Level + 1
-    GiveWep(ply, ply.Level, 0.5)
+    GiveWep(ply, ply.Level, 1)
 end
 
 
 
 function Demote(ply)
-    if ply.Level > 1 then ply.Level = ply.Level - 1 end
+    if ply.Level > 1 then 
+        ply.Level = ply.Level - 1
+        
+        if ply:Alive() then GiveWep(ply, ply.Level, 1) end
+    end
 end
 
 
