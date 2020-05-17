@@ -15,8 +15,9 @@ function GetRandomWeap(weap_type)
     return tmp_weap
 end
 
-function WeapsAdd(cfg)
-    if !file.Exists("gungame/weapons/"..cfg..".txt", "DATA") then return end
+function WeapsAdd()
+
+    if !file.Exists("gungame/weapons/"..CFG..".txt", "DATA") then return end
     
     local types = {
     "pistol",
