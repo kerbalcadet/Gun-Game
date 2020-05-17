@@ -79,11 +79,10 @@ function Demote(ply)
 end
 
 
-hook.Add(PlayerDeath, gg_ply_death, function(ply)
+hook.Add("PlayerDeath", "gg_ply_death", function(vic, inf, att)
     if ended then return end
 
     if att != vic then
-        
         if att:GetActiveWeapon():GetClass() != KNIFE or inf:GetClass() != "player" or weaps[att.Level].class == KNIFE then       --normal kill (inf = player on melee or shoot)
             if(att.Level >= #weaps) then
                 att:StripWeapons()
@@ -96,12 +95,6 @@ hook.Add(PlayerDeath, gg_ply_death, function(ply)
     else        --suicide
         Demote(att)
     end
-
-    net.Start("death")      --deathnotice to cl
-    net.WriteEntity(vic)
-    net.WriteEntity(inf)
-    net.WriteEntity(att)
-    net.Broadcast()
 end)
 
 
