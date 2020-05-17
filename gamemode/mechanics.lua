@@ -40,6 +40,7 @@ function GiveWep(ply, lvl, time)
             ply:GiveAmmo(a, weapobj:GetPrimaryAmmoType())
         else
             ply:Give(weap.class, true)
+            weapobj = ply:GetWeapon(weap.class)
 
             if weap.type != "noammo" then
                 local total = ammo[weap.type] + a*ammo[weap.type]
