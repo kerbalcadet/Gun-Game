@@ -84,12 +84,11 @@ function GM:PlayerNoClip(ply, bool)
     return ply.Debug
 end
 
-concommand.Add("gg_table", function(ply)
+concommand.Add("gg_weap_table", function(ply)
     if !ply.Debug then ply:PrintMessage(2, "you must be in debug mode to use this function") return end
 
-    for i =1, WEAP_NUM:GetInt(), 1
-    do
-        print(weaps[i].type, weaps[i].class)
+    for k, v in pairs(weaps) do 
+        print("["..k.."]".." = "..v.class.." ("..v.type..")")
     end
 end)
 
