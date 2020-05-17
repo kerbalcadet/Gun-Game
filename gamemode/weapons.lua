@@ -12,7 +12,7 @@ function GetRandomWeap(wtype)
         if weap[2] == wtype then table.insert(weapt, weap) end
     end
 
-    if !weapt[1] then return {} end
+    if !weapt[1] then return end
 
     return weapt[math.random(#weapt)]
 end
@@ -35,17 +35,20 @@ function WeapsAdd()
     "launcher"
     }
     
+    local valid = {}
+    for k, wtype in pairs(types) do
+        if GetRandomWeap(wtype) then table.insert(valid, wtype) end
+    end
+
     local w_num = WEAP_NUM:GetInt()
 
-    for k, wtype in pairs(types) do
-        for i = 1, math.ceil(w_num/#types) do
+    for k, wtype in pairs(valid) do
+        for i = 1, math.ceil((w_num - #weaps)/(#valid - k + 1), 0) do
             if #weaps >= w_num then return end
 
             local weap = GetRandomWeap(wtype)
 
-            if weap[1] then 
-                print(table.ToString(weap))
-                table.insert(weaps, {class = weap[1], type = weap[2]}) end
+            if weap then table.insert(weaps, {class = weap[1], type = weap[2]}) end
         end
     end
 end
