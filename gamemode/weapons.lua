@@ -1,6 +1,4 @@
 weaps = {}
-
-if SERVER then
     
 function GetRandomWeap(wtype)
     local t = WeapFile()
@@ -74,6 +72,4 @@ function WeapValid(str)
         print("invalid weapon!")
         return false
     end
-end
-
 end
