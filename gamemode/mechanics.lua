@@ -79,9 +79,7 @@ function Demote(ply)
 end
 
 
-
-function GM:PlayerDeath(vic, inf, att)
-
+hook.Add(PlayerDeath, gg_ply_death, function(ply)
     if ended then return end
 
     if att != vic then
@@ -104,7 +102,7 @@ function GM:PlayerDeath(vic, inf, att)
     net.WriteEntity(inf)
     net.WriteEntity(att)
     net.Broadcast()
-end
+end)
 
 
 
