@@ -42,6 +42,7 @@ function GiveWep(ply, lvl, time)
             ply:Give(weap.class, true)
 
             if weap.type != "noammo" then
+                weapobj = ply:GetWeapon(weap.class)
                 local total = ammo[weap.type] + a*ammo[weap.type]
                 local clip1 = math.Clamp(total, 0, weapobj:GetMaxClip1()) 
                 weapobj:SetClip1(clip1) 
