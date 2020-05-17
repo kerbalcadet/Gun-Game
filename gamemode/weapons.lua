@@ -13,6 +13,7 @@ function GetRandomWeap(weap_type)
 end
 
 function WeapsAdd()
+    weaps ={}
 
     if !file.Exists("gungame/weapons/"..CFG..".txt", "DATA") then return end
     
