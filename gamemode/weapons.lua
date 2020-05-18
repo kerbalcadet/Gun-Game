@@ -84,7 +84,7 @@ end
 
 function WeapSend(ply)
     net.Start("sendweaps")
-    net.WriteTable(WeapFile())
+    net.WriteTable(ModelFile())
     if ply then net.Send(ply)
     else net.Broadcast() end
 end
