@@ -154,7 +154,8 @@ function ModelReadFolder(path, mode, argcfg)
         elseif mode != "write" then return end
 
         for k, v in pairs(files) do
-            table.insert(t, v)         --add weap tables to blank table
+            local str = "models/weapons/"..v
+            table.insert(t, str)         --add weap tables to blank table
         end
     
         file.Write(dir, util.TableToKeyValues(t))

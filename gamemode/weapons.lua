@@ -76,6 +76,11 @@ function WeapValid(str)
     end
 end
 
+function WeapPrecache()
+    for k, v in pairs(ModelFile()) do
+        util.PrecacheModel(v)
+    end
+end
 
 
     --client--

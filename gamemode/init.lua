@@ -17,6 +17,7 @@ function GM:Initialize()
     
     WeapsAdd()
     WeapSend()
+    WeapPrecache()
 
     ended = false
 end
