@@ -1,3 +1,5 @@
+util.AddNetworkString("getweaps")
+util.AddNetworkString("sendweaps")
 weaps = {}
     
 function GetRandomWeap(wtype)
@@ -73,3 +75,20 @@ function WeapValid(str)
         return false
     end
 end
+
+
+
+    --client--
+
+
+
+function WeapSend(ply)
+    net.Start("sendweaps")
+    net.WriteTable(WeapFile())
+    if ply then net.Send(ply)
+    else net.Broadcast() end
+end
+
+net.Receive("getweaps", function(len, ply)
+    WeapSend(ply)
+end)
