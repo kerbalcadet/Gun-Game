@@ -15,4 +15,5 @@ function GM:Initialize()
     else Spawns = SpawnFile() end
     WeapsAdd()
     ended = false
+    math.randomseed(CurTime())
 end
