@@ -1,14 +1,14 @@
+util.AddNetworkString("getweaps")
+util.AddNetworkString("sendweaps")
 weaps = {}
-
-if SERVER then
     
 function GetRandomWeap(wtype)
-    if !wtype then return end
-
     local t = WeapFile()
     local weap = {}
 
-    for i = 1, #t do
+    if !wtype then return end
+
+    for i = 1, #t*3 do
         local k = math.random(#t)
         if t[k][2] == wtype then 
             weap = t[k]
@@ -79,4 +79,24 @@ function WeapValid(str)
     end
 end
 
+function WeapPrecache()
+    for k, v in pairs(ModelFile()) do
+        util.PrecacheModel(v)
+    end
 end
+
+
+    --client--
+
+
+
+function WeapSend(ply)
+    net.Start("sendweaps")
+    net.WriteTable(ModelFile())
+    if ply then net.Send(ply)
+    else net.Broadcast() end
+end
+
+net.Receive("getweaps", function(len, ply)
+    WeapSend(ply)
+end)

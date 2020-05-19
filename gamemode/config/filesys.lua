@@ -118,6 +118,9 @@ end
 function ModelFile(argcfg)
     local cfg = argcfg or CFG
 
+    if !file.IsDir("gungame/models/", "DATA") then
+        file.CreateDir("gungame/models/", "DATA") end
+
     if !file.Exists("gungame/models/"..cfg..".txt", "DATA") then       --get and create model file
         file.Write("gungame/models/"..cfg..".txt", "") end
 
@@ -144,14 +147,15 @@ function ModelReadFolder(path, mode, argcfg)
 
         ModelFile(cfg)
 
-        local f, mods = file.Find(path.."*", "MOD")
+        local files, m = file.Find(path.."*.mdl", "MOD")
 
         local t = {} 
         if mode == "add" && file.Exists(dir, "DATA") then t = util.KeyValuesToTable(file.Read(dir, "DATA"))
         elseif mode != "write" then return end
 
-        for k, v in pairs(mods) do
-            table.insert(t, v)         --add weap tables to blank table
+        for k, v in pairs(files) do
+            local str = "models/weapons/"..v
+            table.insert(t, str)         --add weap tables to blank table
         end
     
         file.Write(dir, util.TableToKeyValues(t))

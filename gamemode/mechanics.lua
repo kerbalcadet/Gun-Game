@@ -68,14 +68,23 @@ end
 
 
 function Promote(ply)
+    if(ply.Level >= #weaps) then
+        ply:StripWeapons()
+        if !ended then End(ply) end
+    end
+
     ply.Level = ply.Level + 1
-    GiveWep(ply, ply.Level, 0.5)
+    GiveWep(ply, ply.Level, 1)
 end
 
 
 
 function Demote(ply)
-    if ply.Level > 1 then ply.Level = ply.Level - 1 end
+    if ply.Level > 1 then 
+        ply.Level = ply.Level - 1
+        
+        if ply:Alive() then GiveWep(ply, ply.Level, 1) end
+    end
 end
 
 
@@ -84,10 +93,7 @@ hook.Add("PlayerDeath", "gg_ply_death", function(vic, inf, att)
 
     if att != vic then
         if att:GetActiveWeapon():GetClass() != KNIFE or inf:GetClass() != "player" or weaps[att.Level].class == KNIFE then       --normal kill (inf = player on melee or shoot)
-            if(att.Level >= #weaps) then
-                att:StripWeapons()
-                if !ended then End(att) end
-            else Promote(att) end
+            Promote(att)
         else
             Demote(vic)        --knife kill
             if att:Alive() then GivePlyAmmo(att) end
