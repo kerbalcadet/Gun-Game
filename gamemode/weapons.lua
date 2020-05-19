@@ -31,7 +31,6 @@ function WeapsAdd()
     "shotgun",
     "smg",
     "semiauto",
-    "generic",
     "assault",
     "lmg",
     "sniper",
