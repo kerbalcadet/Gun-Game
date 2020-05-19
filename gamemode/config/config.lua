@@ -37,4 +37,6 @@ BARRIER = CreateConVar("gg_barrier", 0, "FCVAR_NONE", "", -1, 1)
 BARRIER_HEIGHT = CreateConVar("gg_barrier_height", 0, "FCVAR_NONE", "")
 SPAWN_DIST = CreateConVar("gg_spawn_dist", 800, "FCVAR_NONE", "", 0)
 WEAP_NUM = CreateConVar("gg_weap_num", 15, "FCVAR_NONE", "", 1, 100)
+TYPE_TABLE_RAND = CreateConVar("gg_type_table_rand", 0, "FCVAR_NONE", "", 0, 1)
+WEAP_TABLE_RAND = CreateConVar("gg_weap_table_rand", 0, "FCVAR_NONE", "", 0, 1)
 CFG = "ins2"
