@@ -75,6 +75,23 @@ function WeapValid(str)
     end
 end
 
+function GetAtts(weap)
+    atts ={}
+    
+    for k,v in pairs (weap.Attachments) do
+        for key, val in pairs(v) do
+            if(key =="atts") then
+                atts[k] ={}
+                for key1, val1 in pairs(val) do
+                    table.insert(atts[k], val1)
+                end
+            end
+        end
+    end
+
+    return atts
+end
+
 function WeapPrecache()
     for k, v in pairs(ModelFile()) do
         util.PrecacheModel(v)
