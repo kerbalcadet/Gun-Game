@@ -92,6 +92,29 @@ concommand.Add("gg_weap_table", function(ply)
     end
 end)
 
+concommand.Add("gg_att_table", function(ply)
+    if !ply.Debug then ply:PrintMessage(2, "you must be in debug mode to use this function") return end
+
+    for k,v in pairs(GetAtts(ply:GetActiveWeapon())) do
+        for key, val in pairs(v) do
+            print(k, val)
+        end
+    end
+end)
+
+concommand.Add("gg_att_rand", function(ply)
+    if !ply.Debug then ply:PrintMessage(2, "you must be in debug mode to use this function") return end
+    
+    weap =ply:GetActiveWeapon()
+    atts =GetAtts(weap)
+
+    for k,v in pairs(atts) do
+        if(math.random(0, 1) ==1) then
+            weap:attachSpecificAttachment(atts[k][math.random(#atts[k])])
+        end
+    end
+end)
+
 concommand.Add("gg_level", function(ply, cmd, args)
 
     if !ply.Debug then ply:PrintMessage(2, "you must be in debug mode to use this function") return end
