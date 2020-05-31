@@ -52,13 +52,19 @@ function WeapsAdd()
 
             local weap = GetRandomWeap(wtype)
             
-            if(wtype !="noammo") then
+            if(weapons.GetStored(weap[1]) ~=nil and weapons.GetStored(weap[1]).Attachments ~=nil) then
                 local atts_tmp =GetAtts(weap[1])
                 local atts ={}
 
                 for key,v in pairs(atts_tmp) do
                     if(math.random(0, 1) ==1) then
-                        table.insert(atts, atts_tmp[key][math.random(#atts_tmp[key])])
+                        local att =atts_tmp[key][math.random(#atts_tmp[key])]
+                        
+                        if(weapons.GetStored("cw_kk_ins2_base_main").AttachmentDependencies[att] ~=nil) then
+                            table.insert(atts, weapons.GetStored("cw_kk_ins2_base_main").AttachmentDependencies[att][1])
+                        end
+                        
+                        table.insert(atts, att)
                     end
                 end
 
@@ -68,8 +74,6 @@ function WeapsAdd()
             end
         end
     end
-
-    PrintTable(weaps)
 end
 
 function WeapValid(str)
