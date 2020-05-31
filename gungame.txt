@@ -1,0 +1,7 @@
+"barrels"
+{
+	"base"		"base"
+	"title"		"Gun Game"
+	"maps"		""
+	"menusystem"	"1"
+}
