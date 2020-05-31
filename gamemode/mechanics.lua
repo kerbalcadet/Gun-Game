@@ -51,13 +51,7 @@ function GiveWep(ply, lvl, time)
                 weapobj:SetClip1(clip1) 
                 ply:GiveAmmo(total - clip1, weapobj:GetPrimaryAmmoType())
 
-                for k, att in pairs(weaps[ply.Level]["atts"]) do
-                    CustomizableWeaponry:giveAttachment(ply, att, true)
-                    net.Start("CW20_NEWATTACHMENTS")
-                    net.WriteString(att)
-                    net.Send(ply)
-                    weapobj:attachSpecificAttachment(att)
-                end
+                RunConsoleCommand("gg_client_add_att")
             end
         end
 
