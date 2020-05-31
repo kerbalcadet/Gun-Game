@@ -51,7 +51,7 @@ function GiveWep(ply, lvl, time)
                 weapobj:SetClip1(clip1) 
                 ply:GiveAmmo(total - clip1, weapobj:GetPrimaryAmmoType())
 
-                RunConsoleCommand("gg_client_add_att")
+                if CFG ~= "hl2" then RunConsoleCommand("gg_client_add_att") end
             end
         end
 
