@@ -31,6 +31,7 @@ function GiveWep(ply, lvl, time)
 
         ply:StripWeapons()
         ply:StripAmmo()
+        CustomizableWeaponry:removeAllAttachments(ply)
 
         if weap.type == "explosive" then
             ply:Give(weap.class)
@@ -40,6 +41,7 @@ function GiveWep(ply, lvl, time)
             ply:GiveAmmo(a, weapobj:GetPrimaryAmmoType())
         else
             ply:Give(weap.class, true)
+
             weapobj = ply:GetWeapon(weap.class)
 
             if weap.type != "noammo" then
@@ -48,6 +50,14 @@ function GiveWep(ply, lvl, time)
                 local clip1 = math.Clamp(total, 0, weapobj:GetMaxClip1()) 
                 weapobj:SetClip1(clip1) 
                 ply:GiveAmmo(total - clip1, weapobj:GetPrimaryAmmoType())
+
+                for k, att in pairs(weaps[ply.Level]["atts"]) do
+                    CustomizableWeaponry:giveAttachment(ply, att, true)
+                    net.Start("CW20_NEWATTACHMENTS")
+                    net.WriteString(att)
+                    net.Send(ply)
+                    weapobj:attachSpecificAttachment(att)
+                end
             end
         end
 
