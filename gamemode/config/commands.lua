@@ -95,7 +95,7 @@ end)
 concommand.Add("gg_att_table", function(ply)
     if !ply.Debug then ply:PrintMessage(2, "you must be in debug mode to use this function") return end
 
-    for k,v in pairs(GetAtts(ply:GetActiveWeapon())) do
+    for k,v in pairs(GetAtts(ply:GetActiveWeapon():GetClass())) do
         for key, val in pairs(v) do
             print(k, val)
         end
@@ -106,7 +106,7 @@ concommand.Add("gg_att_rand", function(ply)
     if !ply.Debug then ply:PrintMessage(2, "you must be in debug mode to use this function") return end
     
     weap =ply:GetActiveWeapon()
-    atts =GetAtts(weap)
+    atts =GetAtts(weap:GetClass())
 
     for k,v in pairs(atts) do
         if(math.random(0, 1) ==1) then
