@@ -113,13 +113,32 @@ end)
 concommand.Add("gg_att_rand", function(ply)
     if !ply.Debug then ply:PrintMessage(2, "you must be in debug mode to use this function") return end
     
-    weap =ply:GetActiveWeapon()
+    CustomizableWeaponry:removeAllAttachments(ply)
+    --weap =ply:GetActiveWeapon()
+    weap =ply:GetWeapon(weaps[ply.Level].class)
     atts =GetAtts(weap:GetClass())
 
     for k,v in pairs(atts) do
         if(math.random(0, 1) ==1) then
-            weap:attachSpecificAttachment(atts[k][math.random(#atts[k])])
+            local att =atts[k][math.random(#atts[k])]
+            CustomizableWeaponry:giveAttachment(ply, att, true)
+            net.Start("CW20_NEWATTACHMENTS")
+            net.WriteString(att)
+            net.Send(ply)
+            weap:attachSpecificAttachment(att)
         end
+    end
+end)
+
+concommand.Add("gg_client_add_att", function(ply)
+    weap =ply:GetWeapon(weaps[ply.Level].class)
+    
+    for k, att in pairs(weaps[ply.Level].atts) do
+        CustomizableWeaponry:giveAttachment(ply, att, true)
+        net.Start("CW20_NEWATTACHMENTS")
+        net.WriteString(att)
+        net.Send(ply)
+        weap:attachSpecificAttachment(att)
     end
 end)
 
