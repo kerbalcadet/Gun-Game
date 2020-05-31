@@ -87,19 +87,27 @@ end
 concommand.Add("gg_weap_table", function(ply)
     if !ply.Debug then ply:PrintMessage(2, "you must be in debug mode to use this function") return end
 
+    --[[
     for k, v in pairs(weaps) do 
         print("["..k.."]".." = "..v.class.." ("..v.type..")")
     end
+    ]]
+
+    PrintTable(weaps)
 end)
 
 concommand.Add("gg_att_table", function(ply)
     if !ply.Debug then ply:PrintMessage(2, "you must be in debug mode to use this function") return end
 
+    --[[
     for k,v in pairs(GetAtts(ply:GetActiveWeapon():GetClass())) do
         for key, val in pairs(v) do
             print(k, val)
         end
     end
+    ]]
+
+    PrintTable(GetAtts(ply:GetActiveWeapon():GetClass()))
 end)
 
 concommand.Add("gg_att_rand", function(ply)
