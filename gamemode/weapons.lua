@@ -60,7 +60,9 @@ function WeapsAdd()
                     if(math.random(0, 1) ==1) then
                         local att =atts_tmp[key][math.random(#atts_tmp[key])]
                         
-                        if(weapons.GetStored("cw_kk_ins2_base_main").AttachmentDependencies[att] ~=nil) then
+                        if(weapons.GetStored(weap[1]).AttachmentDependencies ~=nil and weapons.GetStored(weap[1]).AttachmentDependencies[att] ~=nil) then
+                            table.insert(atts, weapons.GetStored(weap[1]).AttachmentDependencies[att][1])
+                        elseif(weapons.GetStored("cw_kk_ins2_base_main").AttachmentDependencies[att] ~=nil) then
                             table.insert(atts, weapons.GetStored("cw_kk_ins2_base_main").AttachmentDependencies[att][1])
                         end
                         
