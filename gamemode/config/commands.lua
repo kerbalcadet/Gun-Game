@@ -139,7 +139,7 @@ concommand.Add("gg_client_add_att", function(ply)
         net.WriteString(att)
         net.Send(ply)
         weap:attachSpecificAttachment(att)
-        if(CFG =="cw2" and att =="am_magnum" or "am_matchgrade") then weap:beginReload() end
+        if(CFG =="cw2" and (att =="am_magnum" or "am_matchgrade")) then weap:beginReload() end
     end
 end)
 
