@@ -51,10 +51,25 @@ function WeapsAdd()
             if #weaps >= w_num then return end
 
             local weap = GetRandomWeap(wtype)
+            
+            if(wtype !="noammo") then
+                local atts_tmp =GetAtts(weap[1])
+                local atts ={}
 
-            if weap then table.insert(weaps, {class = weap[1], type = weap[2]}) end
+                for key,v in pairs(atts_tmp) do
+                    if(math.random(0, 1) ==1) then
+                        table.insert(atts, atts_tmp[key][math.random(#atts_tmp[key])])
+                    end
+                end
+
+                if weap then table.insert(weaps, {class = weap[1], type = weap[2], atts =atts}) end
+            else
+                if weap then table.insert(weaps, {class = weap[1], type = weap[2]}) end
+            end
         end
     end
+
+    PrintTable(weaps)
 end
 
 function WeapValid(str)
@@ -78,13 +93,11 @@ end
 function GetAtts(weap)
     atts ={}
     
-    for k,v in pairs (weap.Attachments) do
-        for key, val in pairs(v) do
-            if(key =="atts") then
-                atts[k] ={}
-                for key1, val1 in pairs(val) do
-                    table.insert(atts[k], val1)
-                end
+    for category,data in pairs (weapons.GetStored(weap)["Attachments"]) do
+        atts[category] ={}
+        if category !="+use" then
+            for key, att in ipairs(data.atts) do
+                table.insert(atts[category], att)
             end
         end
     end
