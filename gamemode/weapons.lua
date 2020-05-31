@@ -51,8 +51,8 @@ function WeapsAdd()
             if #weaps >= w_num then return end
 
             local weap = GetRandomWeap(wtype)
-            
-            if(weapons.GetStored(weap[1]) ~=nil and weapons.GetStored(weap[1]).Attachments ~=nil) then
+
+            if(weap ~=nil and weapons.GetStored(weap[1]) ~=nil and weapons.GetStored(weap[1]).Attachments ~=nil) then
                 local atts_tmp =GetAtts(weap[1])
                 local atts ={}
 
