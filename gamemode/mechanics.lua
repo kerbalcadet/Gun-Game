@@ -41,13 +41,11 @@ function GiveWep(ply, lvl, time)
             ply:GiveAmmo(a, weapobj:GetPrimaryAmmoType())
         else
             ply:Give(weap.class, true)
-            GiveAtts(ply)
 
             weapobj = ply:GetWeapon(weap.class)
 
             if weap.type != "noammo" then
                 weapobj = ply:GetWeapon(weap.class)
-
                 local total = ammo[weap.type] + a*ammo[weap.type]
                 local clip1 = math.Clamp(total, 0, weapobj:GetMaxClip1())
 
@@ -60,6 +58,8 @@ function GiveWep(ply, lvl, time)
     end)
 end 
 
+
+
 function GivePlyAmmo(ply)
     local weap = weaps[ply.Level]
 
@@ -69,10 +69,13 @@ function GivePlyAmmo(ply)
     ply:GiveAmmo(ammo[weap.type], ply:GetWeapon(weap.class):GetPrimaryAmmoType())
 end
 
+
+
 function GiveAtts(ply)
     CustomizableWeaponry:removeAllAttachments(ply)
     if CFG ~="hl2" then ply:ConCommand("gg_client_add_att") end
 end
+
 
 
 function Promote(ply)
