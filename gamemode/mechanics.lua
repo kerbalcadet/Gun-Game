@@ -66,8 +66,6 @@ end
 function GivePlyAmmo(ply)
     local weap = weaps[ply.Level]
 
-    GiveAtts(ply)
-
     if ply:GetWeapon(weap.class) then ply:Give(weap.class, true) end                --for thrown explosives
     ply:GiveAmmo(ammo[weap.type], ply:GetWeapon(weap.class):GetPrimaryAmmoType())
 end
