@@ -40,7 +40,6 @@ function GiveWep(ply, lvl, time)
 
             ply:GiveAmmo(a, weapobj:GetPrimaryAmmoType())
         else
-            GiveAtts(ply)
             ply:Give(weap.class, true)
 
             weapobj = ply:GetWeapon(weap.class)
@@ -50,6 +49,7 @@ function GiveWep(ply, lvl, time)
                 local total = ammo[weap.type] + a*ammo[weap.type]
                 local clip1 = math.Clamp(total, 0, weapobj:GetMaxClip1())
 
+                GiveAtts(ply)
                 weapobj:SetClip1(clip1) 
                 ply:GiveAmmo(total - clip1, weapobj:GetPrimaryAmmoType())
             end
