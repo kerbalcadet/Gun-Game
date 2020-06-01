@@ -44,6 +44,8 @@ function WeapsAdd()
         if GetRandomWeap(wtype) then table.insert(valid, wtype) end
     end
 
+    if TYPE_TABLE_RAND:GetInt() ==1 then valid =Shuffle(valid) end
+
     local w_num = WEAP_NUM:GetInt()
 
     for k, wtype in pairs(valid) do
@@ -76,6 +78,8 @@ function WeapsAdd()
             end
         end
     end
+
+    if WEAP_TABLE_RAND:GetInt() ==1 then weaps =Shuffle(weaps) end
 end
 
 function WeapValid(str)
