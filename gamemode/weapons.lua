@@ -41,7 +41,7 @@ function WeapsAdd()
     
     local valid = {}
     for k, wtype in pairs(types) do
-        if GetRandomWeap(wtype) then table.insert(valid, wtype) end
+        if(wtype !="generic" and GetRandomWeap(wtype)) then table.insert(valid, wtype) end
     end
 
     if TYPE_TABLE_RAND:GetInt() ==1 then valid =Shuffle(valid) end
@@ -107,7 +107,10 @@ function GetAtts(weap)
         atts[category] ={}
         if category !="+use" then
             for key, att in ipairs(data.atts) do
-                table.insert(atts[category], att)
+                if(string.match(att, "_gl_") or string.match(att, "m203")) then
+                    if(ALLOW_GL:GetInt() ==1) then table.insert(atts[category], att) end
+                else table.insert(atts[category], att)
+                end
             end
         end
     end
