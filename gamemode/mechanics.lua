@@ -1,6 +1,4 @@
 
-
-
     --player management--
 
 
@@ -99,19 +97,16 @@ function Demote(ply)
     end
 end
 
-
-hook.Add("PlayerDeath", "gg_ply_death", function(vic, inf, att)
+hook.Add("DoPlayerDeath", "gg_ply_death", function(vic, att, dmg)
+    local iht = att:GetActiveWeapon().NormalHoldType
+    
     if ended then return end
 
-    if att != vic then
-        if att:GetActiveWeapon():GetClass() != KNIFE or inf:GetClass() != "player" or weaps[att.Level].class == KNIFE then       --normal kill (inf = player on melee or shoot)
-            Promote(att)
-        else
-            Demote(vic)        --knife kill
-            if att:Alive() then GivePlyAmmo(att) end
-        end
-    else        --suicide
-        Demote(att)
+    if vic == att then Demote(vic)
+    elseif dmg:GetDamageType() == 4 and iht != "knife" and iht != "fist" and iht != "melee" and iht != "melee2" then -- if vic died by slash/stab damage and that is not the primary attack of the attacker's wpn
+        Demote(vic)
+        GivePlyAmmo(att)
+    else Promote(att)
     end
 end)
 
