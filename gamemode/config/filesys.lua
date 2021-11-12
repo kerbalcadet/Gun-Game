@@ -23,7 +23,15 @@ end
 
     --weap file--
 
+function InitWeaponFiles()
+    for i, wep in ipairs(weapons.GetList()) do
+        local cat, cn = wep.Category, wep.ClassName
 
+        if (not WeapFile(cat).cn) and wep.Spawnable then
+            WeapFileAdd(cn, "generic", cat)
+        end
+    end
+end
 
 function WeapFile(argcfg)
     local cfg = argcfg or CFG
@@ -84,29 +92,6 @@ end
 
 function WeapFileClear(cfg)
     file.Delete("gungame/weapons/"..cfg..".txt")
-end
-
-function WeapReadFolder(path, mode, argcfg)
-    if path && mode then
-        local cfg = argcfg or CFG
-        local dir = "gungame/weapons/"..cfg..".txt"
-
-        WeapFile(cfg)
-
-        local f, weps = file.Find(path.."*", "MOD")
-
-        local t = {} 
-        if mode == "add" && file.Exists(dir, "DATA") then t = util.KeyValuesToTable(file.Read(dir, "DATA"))
-        elseif mode != "write" then return end
-
-        for k, v in pairs(weps) do
-            table.insert(t, {v, "generic"})         --add weap tables to blank table
-        end
-    
-        file.Write(dir, util.TableToKeyValues(t))
-
-        print(WeapFileRead(cfg))
-    end
 end
 
 

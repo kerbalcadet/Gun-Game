@@ -15,6 +15,8 @@ function GM:Initialize()
     if Spawns[1] then SpawnFile(Spawns)
     else Spawns = SpawnFile() end
     
+    InitWeaponFiles()
+    
     WeapsAdd()
     WeapSend()
     WeapPrecache()
