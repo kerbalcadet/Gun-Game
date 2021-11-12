@@ -22,4 +22,5 @@ function GM:Initialize()
     WeapPrecache()
 
     ended = false
+    math.randomseed(CurTime())
 end

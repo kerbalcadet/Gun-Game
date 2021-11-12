@@ -1,6 +1,4 @@
 
-
-
     --player management--
 
 
@@ -25,12 +23,15 @@ function GiveWep(ply, lvl, time)
 
         if lvl > 1 && weapobj:IsValid() && weapobj:GetClass() == weap.class then     --if weapon is the same as current
             GivePlyAmmo(ply)
+            weapobj:detachAll()
+            GiveAtts(ply)
             return
         end
         if ended then return end
 
         ply:StripWeapons()
         ply:StripAmmo()
+        
 
         if weap.type == "explosive" then
             ply:Give(weap.class)
@@ -40,12 +41,15 @@ function GiveWep(ply, lvl, time)
             ply:GiveAmmo(a, weapobj:GetPrimaryAmmoType())
         else
             ply:Give(weap.class, true)
+
             weapobj = ply:GetWeapon(weap.class)
 
             if weap.type != "noammo" then
                 weapobj = ply:GetWeapon(weap.class)
                 local total = ammo[weap.type] + a*ammo[weap.type]
-                local clip1 = math.Clamp(total, 0, weapobj:GetMaxClip1()) 
+                local clip1 = math.Clamp(total, 0, weapobj:GetMaxClip1())
+
+                GiveAtts(ply)
                 weapobj:SetClip1(clip1) 
                 ply:GiveAmmo(total - clip1, weapobj:GetPrimaryAmmoType())
             end
@@ -61,8 +65,14 @@ function GivePlyAmmo(ply)
     local weap = weaps[ply.Level]
 
     if ply:GetWeapon(weap.class) then ply:Give(weap.class, true) end                --for thrown explosives
-
     ply:GiveAmmo(ammo[weap.type], ply:GetWeapon(weap.class):GetPrimaryAmmoType())
+end
+
+
+
+function GiveAtts(ply)
+    CustomizableWeaponry:removeAllAttachments(ply)
+    if CFG ~="hl2" then ply:ConCommand("gg_client_add_att") end
 end
 
 
@@ -87,19 +97,16 @@ function Demote(ply)
     end
 end
 
-
-hook.Add("PlayerDeath", "gg_ply_death", function(vic, inf, att)
+hook.Add("DoPlayerDeath", "gg_ply_death", function(vic, att, dmg)
+    local iht = att:GetActiveWeapon().NormalHoldType
+    
     if ended then return end
 
-    if att != vic then
-        if att:GetActiveWeapon():GetClass() != KNIFE or inf:GetClass() != "player" or weaps[att.Level].class == KNIFE then       --normal kill (inf = player on melee or shoot)
-            Promote(att)
-        else
-            Demote(vic)        --knife kill
-            if att:Alive() then GivePlyAmmo(att) end
-        end
-    else        --suicide
-        Demote(att)
+    if vic == att then Demote(vic)
+    elseif dmg:GetDamageType() == 4 and iht != "knife" and iht != "fist" and iht != "melee" and iht != "melee2" then -- if vic died by slash/stab damage and that is not the primary attack of the attacker's wpn
+        Demote(vic)
+        GivePlyAmmo(att)
+    else Promote(att)
     end
 end)
 
@@ -121,6 +128,28 @@ hook.Add("Think", "killunderheight", function()
         end
     end
 end)
+
+function Shuffle(array)
+    -- fisher-yates
+    local output = { }
+    local random = math.random
+
+    for index = 1, #array do
+        local offset = index - 1
+        local value = array[index]
+        local randomIndex = offset*random()
+        local flooredIndex = randomIndex - randomIndex%1
+
+        if flooredIndex == offset then
+            output[#output + 1] = value
+        else
+            output[#output + 1] = output[flooredIndex + 1]
+            output[flooredIndex + 1] = value
+        end
+    end
+
+    return output
+end
 
 
 
