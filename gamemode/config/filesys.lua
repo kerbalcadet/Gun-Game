@@ -27,8 +27,32 @@ function InitWeaponFiles()
     for i, wep in ipairs(weapons.GetList()) do
         local cat, cn = wep.Category, wep.ClassName
 
+        if cat && cat:find("^ARC9*") then cat = "arc9" end
+
+        local types = {
+            ["Grenade"] = "explosive",
+            ["Assault Rifle"] = "assault",
+            ["Pistol"] = "pistol",
+            ["Shotgun"] = "shotgun",
+            ["Submachine Gun"] = "smg",
+            ["Antimateriel Rifle"] = "sniper",
+            ["Light Machine Gun"] = "lmg",
+            ["General-Purpose Machine Gun"] = "lmg",
+            ["Sniper Rifle"] = "sniper",
+            ["Machine Pistol"] = "smg",
+            ["Bladed Weapon"] = "noammo",
+            ["Bolt-Action Rifle"] = "sniper",
+            ["Battle Rifle"] = "assault",
+            ["Melee"] = "noammo",
+            ["Grenade Launcher"] = "launcher",
+            ["Dedicated Marksman Rifle"] = "semiauto",
+            ["Squad Assault Weapon"] = "lmg",
+            ["Self-Loading Rifle"] = "semiauto",
+        }
+        local wtype = types[wep.Class] or "generic"
+
         if (not WeapFile(cat).cn) and wep.Spawnable then
-            WeapFileAdd(cn, "generic", cat)
+            WeapFileAdd(cn, wtype, cat)
         end
     end
 end

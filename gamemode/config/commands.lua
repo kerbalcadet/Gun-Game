@@ -133,13 +133,19 @@ end)
 concommand.Add("gg_client_add_att", function(ply)
     weap =ply:GetWeapon(weaps[ply.Level].class)
     
-    for k, att in pairs(weaps[ply.Level].atts) do
-        CustomizableWeaponry:giveAttachment(ply, att, true)
-        net.Start("CW20_NEWATTACHMENTS")
-        net.WriteString(att)
-        net.Send(ply)
-        weap:attachSpecificAttachment(att)
-        if(CFG =="cw2" and (att =="am_magnum" or "am_matchgrade")) then weap:beginReload() end
+    if weap.Base && weap.Base:find("^arc9_*") then
+        weap.Attachments = weaps[ply.Level].atts
+        weap:PostModify()
+        weap:PruneAttachments()
+    else
+        for k, att in pairs(weaps[ply.Level].atts) do
+            CustomizableWeaponry:giveAttachment(ply, att, true)
+            net.Start("CW20_NEWATTACHMENTS")
+            net.WriteString(att)
+            net.Send(ply)
+            weap:attachSpecificAttachment(att)
+            if(CFG =="cw2" and (att =="am_magnum" or "am_matchgrade")) then weap:beginReload() end
+        end
     end
 end)
 

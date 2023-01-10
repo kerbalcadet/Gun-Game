@@ -23,7 +23,7 @@ function GiveWep(ply, lvl, time)
 
         if lvl > 1 && weapobj:IsValid() && weapobj:GetClass() == weap.class then     --if weapon is the same as current
             GivePlyAmmo(ply)
-            weapobj:detachAll()
+            if !(weapobj.Base && weapobj.Base:find("^arc9_*")) then weapobj:detachAll() end
             GiveAtts(ply)
             return
         end

@@ -55,23 +55,31 @@ function WeapsAdd()
             local weap = GetRandomWeap(wtype)
 
             if(weap ~=nil and weapons.GetStored(weap[1]) ~=nil and weapons.GetStored(weap[1]).Attachments ~=nil) then
-                local atts_tmp =GetAtts(weap[1])
-                local atts ={}
+                local base = weapons.GetStored(weap[1]).Base or nil
+                local atts = {}
+                if base && base:find("^arc9_*") then
+                    weapobj = ents.Create(weap[1])
+                    weapobj:RollRandomAtts(weapobj.Attachments)
+                    atts = weapobj.Attachments
+                else
+                    local atts_tmp =GetAtts(weap[1])
 
-                for key,v in pairs(atts_tmp) do
-                    if(math.random(0, 1) ==1) then
-                        local att =atts_tmp[key][math.random(#atts_tmp[key])]
-                        
-                        if(weapons.GetStored(weap[1]).AttachmentDependencies ~=nil and weapons.GetStored(weap[1]).AttachmentDependencies[att] ~=nil) then
-                            table.insert(atts, weapons.GetStored(weap[1]).AttachmentDependencies[att][1])
-                        elseif(weapons.GetStored("cw_kk_ins2_base_main").AttachmentDependencies[att] ~=nil) then
-                            table.insert(atts, weapons.GetStored("cw_kk_ins2_base_main").AttachmentDependencies[att][1])
+                    for key,v in pairs(atts_tmp) do
+                        if(math.random(0, 1) ==1) then
+                            local att =atts_tmp[key][math.random(#atts_tmp[key])]
+                            
+                            if(weapons.GetStored(weap[1]).AttachmentDependencies ~=nil and weapons.GetStored(weap[1]).AttachmentDependencies[att] ~=nil) then
+                                table.insert(atts, weapons.GetStored(weap[1]).AttachmentDependencies[att][1])
+                            elseif(weapons.GetStored("cw_kk_ins2_base_main").AttachmentDependencies[att] ~=nil) then
+                                table.insert(atts, weapons.GetStored("cw_kk_ins2_base_main").AttachmentDependencies[att][1])
+                            end
+                            
+                            table.insert(atts, att)
                         end
-                        
-                        table.insert(atts, att)
                     end
-                end
 
+                end
+                
                 if weap then table.insert(weaps, {class = weap[1], type = weap[2], atts =atts}) end
             else
                 if weap then table.insert(weaps, {class = weap[1], type = weap[2]}) end
