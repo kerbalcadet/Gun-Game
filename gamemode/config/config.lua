@@ -15,7 +15,7 @@ ammo = {
     ["noammo"] = 0
 }
 
-KNIFE = "weapon_crowbar"
+-- KNIFE = "weapon_crowbar"
 
 pms = {
     "models/player/phoenix.mdl",
