@@ -80,7 +80,7 @@ function WeapsAdd()
 
                 end
                 
-                if weap then table.insert(weaps, {class = weap[1], type = weap[2], atts =atts}, melee =GetRandomWeap("noammo")) end
+                if weap then table.insert(weaps, {class = weap[1], type = weap[2], atts =atts, melee = GetRandomWeap("noammo")[1]}) end
             else
                 if weap then table.insert(weaps, {class = weap[1], type = weap[2]}) end
             end
