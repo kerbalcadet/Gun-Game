@@ -55,7 +55,9 @@ function GiveWep(ply, lvl, time)
             end
         end
 
-        ply:Give(KNIFE)
+        -- ply:Give(KNIFE)
+        local melWeap =weaps[ply.Level].melee or nil
+        if melWeap then ply:Give(melWeap) end
     end)
 end 
 
